@@ -9,10 +9,12 @@
   "author": "Caruy Chen <caruychen@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.20.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "form-data": "^3.0.0",
     "nodemon": "^2.0.4",
     "query-string": "^6.13.5"
   },
