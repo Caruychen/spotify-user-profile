@@ -1,18 +1,23 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <TheNavigation />
+    <router-view />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import TheNavigation from "@/components/TheNavigation.vue";
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    TheNavigation
   }
 };
 </script>
+
+<style scoped>
+.home {
+  min-height: 100vh;
+}
+</style>
