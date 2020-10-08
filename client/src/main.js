@@ -27,7 +27,33 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  async error => {
+    const status = error.response.status;
+    const originalConfig = error.config;
 
+    // Capture authentication error - return to login
+    if (status === 400) {
+      router.push({
+        name: "Login"
+      });
+    }
+    // Uses refresh token if access token invalid or expired
+    if (status === 401) {
+      const refreshStatus = await store.dispatch("auth/tokenRefresh");
+      if (refreshStatus === 200) {
+        originalConfig.headers.Authorization =
+          "Bearer " + localStorage.access_token;
+        return axios(originalConfig);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 Vue.config.productionTip = false;
 
 new Vue({
