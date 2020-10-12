@@ -3,7 +3,7 @@ import Vue from "vue";
 export default {
   namespaced: true,
   mutations: {
-    setAccessToken(state, accessToken) {
+    setAccessToken(accessToken) {
       localStorage.access_token = accessToken;
     }
   },

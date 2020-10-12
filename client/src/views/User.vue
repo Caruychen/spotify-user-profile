@@ -20,7 +20,7 @@
               playlists <br /><b>{{ playlistsTotal }}</b>
             </b-col>
             <b-col>
-              followed
+              following
               <br />
               <b>{{ followingTotal }}</b>
             </b-col>
@@ -32,18 +32,28 @@
           </b-row>
         </b-container>
       </b-jumbotron>
+      <b-container id="top-ten-lists-container">
+        <b-row>
+          <b-col md><TopTen type="artists"/></b-col>
+          <b-col md><TopTen type="tracks"/></b-col>
+        </b-row>
+      </b-container>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
+import TopTen from "@/components/TopTen.vue";
 
 export default {
   data() {
     return {
       loading: false
     };
+  },
+  components: {
+    TopTen
   },
   computed: {
     ...mapState("profile", {
@@ -67,7 +77,7 @@ export default {
       try {
         const profile = this.fetchUserProfile();
         const playlists = this.fetchPlaylists();
-        const following = this.fetchFollowing();
+        const following = this.fetchFollowing("artist");
         await Promise.all([profile, playlists, following]);
 
         this.loading = false;

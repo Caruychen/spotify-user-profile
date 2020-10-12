@@ -1,4 +1,5 @@
 import Vue from "vue";
+import querystring from "query-string";
 
 export default {
   namespaced: true,
@@ -16,10 +17,12 @@ export default {
     }
   },
   actions: {
-    fetchFollowing: async ({ commit }) => {
-
+    fetchFollowing: async ({ commit }, type) => {
       const following = await Vue.axios.get(
-        "https://api.spotify.com/v1/me/following?type=artist"
+        "https://api.spotify.com/v1/me/following?" +
+          querystring.stringify({
+            type
+          })
       );
       if (following.status === 200) {
         commit("setFollowing", following.data.artists);
