@@ -11,10 +11,6 @@ export default {
     getTopTen: state => (type, timeRange) => {
       const topTen = state[type][timeRange].slice(0, 10);
       return topTen;
-    },
-    isFetched: state => (type, timeRange) => {
-      // const isloaded = state[type][timeRange] !== "undefined" ? true: false;
-      return type + timeRange + state
     }
   },
   mutations: {
@@ -23,23 +19,25 @@ export default {
     }
   },
   actions: {
-    fetchTopItems: async ({ commit }, params) => {
-      const limit = 50;
-      const topItems = await Vue.axios.get(
-        "https://api.spotify.com/v1/me/top/" +
-          params.type +
-          "?" +
-          querystring.stringify({
-            limit,
-            time_range: params.timeRange
-          })
-      );
-      if (topItems.status === 200) {
-        commit("setTopItems", {
-          items: topItems.data.items,
-          type: params.type,
-          timeRange: params.timeRange
-        });
+    fetchTopItems: async ({ state, commit }, params) => {
+      if (!state[params.type][params.timeRange]) {
+        const limit = 50;
+        const topItems = await Vue.axios.get(
+          "https://api.spotify.com/v1/me/top/" +
+            params.type +
+            "?" +
+            querystring.stringify({
+              limit,
+              time_range: params.timeRange
+            })
+        );
+        if (topItems.status === 200) {
+          commit("setTopItems", {
+            items: topItems.data.items,
+            type: params.type,
+            timeRange: params.timeRange
+          });
+        }
       }
     }
   }
