@@ -1,0 +1,100 @@
+#top-artists
+    padding: 4rem 1rem 6rem
+    text-align: left
+
+    #top-views-header
+        background-color: $void-light
+        margin: 0
+
+        hr
+            border-color: $stark
+
+        h1
+            font-size: 3rem
+            margin-bottom: 1rem
+
+        #time-range-buttons
+            display: flex
+            justify-content: space-between
+
+            button
+                font-size: 0.9rem
+                font-weight: 500
+                background-color: $void-light
+                border: none
+                padding: 0
+
+    .top-items-container
+        display: flex
+        flex-wrap: wrap
+        margin: 0
+        justify-content: space-around
+
+        .top-item
+            text-align: center
+            width: 125px
+            margin: 0 5px
+
+            a
+                display: block
+                font-size: 0.8rem
+                font-weight: 500
+                padding: 0.8rem 0 2rem
+
+            .card
+                width: 100%
+                border: none
+                background-color: $void-light
+                align-items: center
+
+                .card-img
+                    width: 100%
+                    height: 125px
+                    object-fit: cover
+                    opacity: 1
+                    filter: alpha(opacity=100)
+                    transition: 0.3s
+
+                .card-body
+                    padding: 0
+                    width: 100%
+                    text-align: center
+
+                    p
+                        position: absolute
+                        top: 50%
+                        left: 50%
+                        transform: translate(-50%, -50%)
+                        opacity: 0
+                        filter: alpha(opacity=0)
+                        transition: 0.3s
+                        font-size: 2rem
+                        font-weight: 500
+
+            .card:hover > .card-img
+                opacity: 0.4
+                filter: alpha(opacity=40)
+            .card:hover > .card-body p 
+                opacity: 1
+                filter: alpha(opacity=100)
+
+@include media-breakpoint-up(md)
+    #top-artists
+        padding: 4rem 8rem 6rem
+
+        #top-views-header
+            #time-range-buttons
+                justify-content: flex-start
+
+                button
+                    margin-right: 3rem
+
+@include media-breakpoint-up(xl)
+    #top-artists
+        .top-items-container
+            .top-item
+                width: 175px
+                margin: 0 15px
+
+                .card .card-img
+                    height: 175px

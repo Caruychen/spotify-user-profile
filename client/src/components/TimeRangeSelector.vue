@@ -1,10 +1,18 @@
 <template>
   <div>
-    <b-dropdown :text="selected">
-      <b-dropdown-item
+    <div v-if="version === 'button'" id="time-range-buttons">
+      <b-button
+        v-for="(timeRange, index) in timeRanges"
+        :key="index"
         @click="chooseTimeRange(timeRange)"
-        v-for="timeRange in timeRanges"
-        :key="timeRange.text"
+      >{{ timeRange.text }}
+      </b-button>
+    </div>
+    <b-dropdown v-else :text="selected">
+      <b-dropdown-item
+        v-for="(timeRange, index) in timeRanges"
+        :key="index"
+        @click="chooseTimeRange(timeRange)"
         >{{ timeRange.text }}</b-dropdown-item
       >
     </b-dropdown>
@@ -22,6 +30,9 @@ export default {
         { text: "Last 4 Weeks", query: "short_term" }
       ]
     };
+  },
+  props: {
+    version: String
   },
   methods: {
     chooseTimeRange(selectedTimeRange) {
