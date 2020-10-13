@@ -9,8 +9,8 @@
     </b-jumbotron>
     <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif" alt="loading" />
     <div v-else class="top-items-container">
-      <div v-for="(item, index) in allItems" :key="index" class="top-item">
-        <b-card img-src="@/assets/logos/user-regular.svg" :alt="item.name">
+      <div v-for="(item, index) in allItems('artists', timeRange)" :key="index" class="top-item">
+        <b-card :img-src="item.image" :alt="item.name">
           <b-card-text>
             {{ index + 1 }}
           </b-card-text>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import TimeRangeSelector from "@/components/TimeRangeSelector.vue";
 
 export default {
@@ -38,22 +38,12 @@ export default {
     TimeRangeSelector
   },
   computed: {
-    ...mapState("top", {
-      allItems(state) {
-        return state.artists[this.timeRange].map(item => {
-          let imageUrl = item.images[0].url
-          return {
-            name: item.name,
-            external_url: item.external_urls.spotify,
-            image: imageUrl
-          }
-        });
-      }
+    ...mapGetters("top", {
+      allItems: "getAllTopItems"
     })
   },
   watch: {
     timeRange: function() {
-      console.log(this.timeRange);
       this.loadTopItems();
     }
   },

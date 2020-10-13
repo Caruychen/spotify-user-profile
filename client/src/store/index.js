@@ -9,7 +9,12 @@ import top from "./modules/top.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    topTypes: [
+      'artists',
+      'tracks'
+    ]
+  },
   mutations: {},
   actions: {},
   modules: {
