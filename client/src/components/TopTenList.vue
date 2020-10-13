@@ -4,14 +4,14 @@
     <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
       <b-card class="overflow-hidden" id="top-ten-list-card">
         <b-row>
-          <b-col cols="3">
+          <b-col cols="3" xl="2">
             <b-card-img
               class="image-column rounded-0"
               :src="item.image[item.image.length - 1].url"
               :alt="item.name"
             ></b-card-img>
           </b-col>
-          <b-col cols="9" class="text-column">
+          <b-col cols="9" xl="10" class="text-column">
             <b-card-body :title="item.name" title-tag="p"></b-card-body>
           </b-col>
         </b-row>

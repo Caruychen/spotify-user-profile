@@ -24,8 +24,12 @@ a:hover
 
 @include media-breakpoint-up(md)
     #nav
-        width: auto
+        width: 4rem
         flex-direction: column
         height: 100%
         .nav-link
             flex: 0
+
+@include media-breakpoint-up(lg)
+    #nav
+        width: auto
