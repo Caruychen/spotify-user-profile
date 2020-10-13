@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+// import { mapState } from "vuex";
 
 Vue.use(VueRouter);
 
@@ -18,18 +19,22 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
-        path: "/artists",
-        name: "Artists",
+        path: "/top/:slug",
+        name: "TopItems",
+        props: true,
         component: () =>
-          import(/* webpackChunkName: "artists" */ "../views/TopArtists.vue"),
-        meta: { requiresAuth: true }
-      },
-      {
-        path: "/tracks",
-        name: "Tracks",
-        component: () =>
-          import(/* webpackChunkName: "tracks" */ "../views/TopTracks.vue"),
-        meta: { requiresAuth: true }
+          import(/* webpackChunkName: "topitems" */ "../views/TopItems.vue"),
+        beforeEnter: (to, from, next) => {
+          const test = ["artists", "tracks"];
+          const exists = test.find(type => {
+            return type === to.params.slug;
+          });
+          if (exists) {
+            next();
+          } else {
+            next({ name: "NotFound" });
+          }
+        }
       },
       {
         path: "/recent",

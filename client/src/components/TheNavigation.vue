@@ -5,12 +5,28 @@
       <br />
       Home
     </router-link>
-    <router-link class="nav-link" to="/artists">
+    <router-link
+      class="nav-link"
+      :to="{
+        name: 'TopItems',
+        params: {
+          slug: topViews[0]
+        }
+      }"
+    >
       <b-icon-star></b-icon-star>
       <br />
       Top Artists
     </router-link>
-    <router-link class="nav-link" to="/tracks">
+    <router-link
+      class="nav-link"
+      :to="{
+        name: 'TopItems',
+        params: {
+          slug: topViews[1]
+        }
+      }"
+    >
       <b-icon-music-note-beamed></b-icon-music-note-beamed>
       <br />
       Top Tracks
@@ -22,3 +38,14 @@
     </router-link>
   </nav>
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState({
+      topViews: state => state.topTypes
+    })
+  }
+};
+</script>

@@ -10,10 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    topTypes: [
-      'artists',
-      'tracks'
-    ]
+    topTypes: ["artists", "tracks"]
   },
   mutations: {},
   actions: {},
