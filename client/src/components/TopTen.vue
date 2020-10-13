@@ -33,13 +33,6 @@ export default {
     TimeRangeSelector,
     TopTenList
   },
-  filters: {
-    capitalize: text => {
-      if (!text) return "";
-      text = text.toString();
-      return text.charAt(0).toUpperCase() + text.slice(1);
-    }
-  },
   methods: {
     onTimeRangeUpdate(timeRange) {
       this.timeRange = timeRange;
