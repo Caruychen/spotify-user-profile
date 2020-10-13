@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading">loading</div>
+  <b-spinner v-if="loading" label="Spinning"></b-spinner>
   <ul v-else>
     <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
       <b-card class="overflow-hidden" id="top-ten-list-card">
@@ -7,15 +7,7 @@
           <b-col cols="3">
             <b-card-img
               class="image-column rounded-0"
-              v-if="type === 'artists'"
-              :src="item.images[item.images.length - 1].url"
-              :alt="item.name"
-            ></b-card-img>
-            <b-card-img
-              cols="3"
-              class="image-column rounded-0"
-              v-else
-              :src="item.album.images[item.album.images.length - 1].url"
+              :src="item.image[item.image.length - 1].url"
               :alt="item.name"
             ></b-card-img>
           </b-col>

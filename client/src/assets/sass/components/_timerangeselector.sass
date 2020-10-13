@@ -1,0 +1,13 @@
+.time-range-buttons
+    display: flex
+    justify-content: space-between
+
+    button
+        height: 100%
+
+@include media-breakpoint-up(md)
+    .time-range-buttons
+        justify-content: flex-start
+
+        .btn-custom-button
+            margin-right: 3rem

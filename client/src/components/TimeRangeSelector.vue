@@ -1,22 +1,22 @@
 <template>
-  <div>
-    <div v-if="version === 'button'" id="time-range-buttons">
-      <b-button
-        v-for="(timeRange, index) in timeRanges"
-        :key="index"
-        @click="chooseTimeRange(timeRange)"
+  <div v-if="version === 'button'" class="time-range-buttons">
+    <b-button
+      variant="custom-button"
+      v-for="(timeRange, index) in timeRanges"
+      :key="index"
+      @click="chooseTimeRange(timeRange)"
+      :pressed="timeRange.text === selected"
       >{{ timeRange.text }}
-      </b-button>
-    </div>
-    <b-dropdown v-else :text="selected">
-      <b-dropdown-item
-        v-for="(timeRange, index) in timeRanges"
-        :key="index"
-        @click="chooseTimeRange(timeRange)"
-        >{{ timeRange.text }}</b-dropdown-item
-      >
-    </b-dropdown>
+    </b-button>
   </div>
+  <b-dropdown v-else variant="custom-dropdown" :text="selected">
+    <b-dropdown-item
+      v-for="(timeRange, index) in timeRanges"
+      :key="index"
+      @click="chooseTimeRange(timeRange)"
+      >{{ timeRange.text }}</b-dropdown-item
+    >
+  </b-dropdown>
 </template>
 
 <script>

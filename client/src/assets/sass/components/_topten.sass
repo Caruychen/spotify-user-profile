@@ -1,18 +1,22 @@
-#top-ten-container
+.top-ten-container
     display: flex
     flex-direction: column
     align-items: center
     justify-content: center
     text-align: left
 
-    h2
-        font-size: 1.2rem
-        font-weight: 700
-
-    #top-ten-heading
+    .top-ten-heading
         width: 300px
+        border-bottom: 1px solid $stark
+        padding-bottom: 0.1rem
+        margin-bottom: 0.3rem
+
         .col
             padding: 0
+            h2
+                font-size: 1.2rem
+                font-weight: 700
+                margin: 0
         .col:nth-of-type(2)
             text-align: right
 

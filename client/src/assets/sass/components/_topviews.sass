@@ -1,4 +1,4 @@
-#top-artists
+#top-items
     padding: 4rem 1rem 6rem
     text-align: left
 
@@ -12,17 +12,10 @@
         h1
             font-size: 3rem
             margin-bottom: 1rem
-
-        #time-range-buttons
-            display: flex
-            justify-content: space-between
-
-            button
-                font-size: 0.9rem
-                font-weight: 500
-                background-color: $void-light
-                border: none
-                padding: 0
+            
+    .loading-image
+        text-align: center
+        color: $void-lighter
 
     .top-items-container
         display: flex
@@ -79,18 +72,11 @@
                 filter: alpha(opacity=100)
 
 @include media-breakpoint-up(md)
-    #top-artists
+    #top-items
         padding: 4rem 8rem 6rem
 
-        #top-views-header
-            #time-range-buttons
-                justify-content: flex-start
-
-                button
-                    margin-right: 3rem
-
 @include media-breakpoint-up(xl)
-    #top-artists
+    #top-items
         .top-items-container
             .top-item
                 width: 175px

@@ -1,5 +1,5 @@
 // fonts
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap')
 $roboto: 'Roboto', sans-serif
 
 // Colours
@@ -10,3 +10,41 @@ $fuschia: #A239CA
 $jewel: #4717f6
 $stark: #E7DFDD
 $soft-green: #5fa088
+
+// Buttons
+.btn-custom-button
+    @extend .btn
+    font-size: 0.9rem
+    font-weight: 700
+    background-color: $void-light
+    border: none
+    padding: 0
+    color: $stark
+    opacity: 0.6
+    filter: alpha(opacity=60)
+    transition: 0.3s
+
+.btn-custom-button:hover, .btn-custom-button:active, .btn-custom-button.active
+    color: $stark
+    opacity: 1
+    filter: alpha(opacity=100)
+
+.btn-custom-button:active:after, .btn-custom-button.active:after
+    content: ""
+    display: block
+    margin: 4px auto -6px
+    width: 2.5rem
+    border-bottom: 2.5px solid $soft-green
+
+// Dropdowns
+.btn-custom-dropdown
+    @extend .btn
+    font-size: 1.2rem
+    font-weight: 700
+    background-color: $void-light
+    border: none
+    padding: 0
+    color: $stark
+
+.btn-custom-dropdown:hover, .btn-custom-dropdown:active
+    color: $stark

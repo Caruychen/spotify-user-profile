@@ -1,5 +1,6 @@
 import Vue from "vue";
 import querystring from "query-string";
+import helpers from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -9,20 +10,13 @@ export default {
   },
   getters: {
     getTopTen: state => (type, timeRange) => {
-      const topTen = state[type][timeRange].slice(0, 10);
-      return topTen;
+      return state[type][timeRange].slice(0, 10).map(item => {
+        return helpers.filterItem(item, type);
+      });
     },
     getAllTopItems: state => (type, timeRange) => {
       return state[type][timeRange].map(item => {
-        const images = type === "artists" ? item.images : item.album.images;
-        return {
-          name: item.name,
-          external_url: item.external_urls.spotify,
-          image:
-            images.length > 0
-              ? images[0].url
-              : require("@/assets/logos/person.svg")
-        };
+        return helpers.filterItem(item, type);
       });
     }
   },

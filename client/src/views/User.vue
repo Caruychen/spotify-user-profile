@@ -1,6 +1,6 @@
 <template>
   <div id="user">
-    <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif" alt="loading" />
+    <b-spinner v-if="loading" label="Spinning"></b-spinner>
     <div v-else>
       <b-img
         :src="user.images[0].url"
@@ -32,10 +32,10 @@
           </b-row>
         </b-container>
       </b-jumbotron>
-      <b-container id="top-ten-lists-container">
+      <b-container class="top-ten-lists-container">
         <b-row>
-          <b-col md><TopTen type="artists"/></b-col>
-          <b-col md><TopTen type="tracks"/></b-col>
+          <TopTen type="artists" />
+          <TopTen type="tracks" />
         </b-row>
       </b-container>
     </div>

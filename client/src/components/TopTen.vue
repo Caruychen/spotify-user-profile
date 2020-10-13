@@ -1,19 +1,15 @@
 <template>
-  <div id="top-ten">
-    <div id="top-ten-container">
-      <b-container id="top-ten-heading">
-        <b-row>
-          <b-col
-            ><h2>Top 10 {{ type | capitalize }}</h2></b-col
-          >
-          <b-col
-            ><TimeRangeSelector @updateTimeRange="onTimeRangeUpdate"
-          /></b-col>
-        </b-row>
-      </b-container>
-      <TopTenList :type="type" :timeRange="timeRange" />
-    </div>
-  </div>
+  <b-col md class="top-ten-container">
+    <b-container class="top-ten-heading">
+      <b-row align-v="center">
+        <b-col
+          ><h2>Top 10 {{ type | capitalize }}</h2></b-col
+        >
+        <b-col><TimeRangeSelector @updateTimeRange="onTimeRangeUpdate"/></b-col>
+      </b-row>
+    </b-container>
+    <TopTenList :type="type" :timeRange="timeRange" />
+  </b-col>
 </template>
 
 <script>

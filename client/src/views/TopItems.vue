@@ -1,5 +1,5 @@
 <template>
-  <div id="top-artists">
+  <div id="top-items">
     <b-jumbotron id="top-views-header">
       <template v-slot:header
         >Top {{ $route.params.slug | capitalize }}</template
@@ -10,14 +10,16 @@
       />
       <hr />
     </b-jumbotron>
-    <img v-if="loading" src="https://i.imgur.com/JfPpwOA.gif" alt="loading" />
+    <div v-if="loading" class="loading-image">
+      <b-spinner label="Spinning"></b-spinner>
+    </div>
     <div v-else class="top-items-container">
       <div
         v-for="(item, index) in allItems($route.params.slug, timeRange)"
         :key="index"
         class="top-item"
       >
-        <b-card :img-src="item.image" :alt="item.name">
+        <b-card :img-src="item.image[0].url" :alt="item.name">
           <b-card-text>
             {{ index + 1 }}
           </b-card-text>
