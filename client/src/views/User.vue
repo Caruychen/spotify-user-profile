@@ -1,44 +1,42 @@
 <template>
-  <div id="user">
-    <b-spinner v-if="loading" label="Spinning"></b-spinner>
-    <div v-else>
-      <b-img
-        :src="user.images[0].url"
-        fluid
-        rounded
-        alt="Profile image"
-        id="user-profile-image"
-      ></b-img>
-      <b-jumbotron
-        id="user-profile-header"
-        :header="user.display_name"
-        header-level="4"
-      >
-        <b-container id="user-profile-summary">
-          <b-row align-h="center" cols-md="3">
-            <b-col>
-              playlists <br /><b>{{ playlistsTotal }}</b>
-            </b-col>
-            <b-col>
-              following
-              <br />
-              <b>{{ followingTotal }}</b>
-            </b-col>
-            <b-col>
-              followers
-              <br />
-              <b>{{ user.followers.total }}</b>
-            </b-col>
-          </b-row>
-        </b-container>
-      </b-jumbotron>
-      <b-container class="top-ten-lists-container">
-        <b-row>
-          <TopTen type="artists" />
-          <TopTen type="tracks" />
+  <b-spinner v-if="loading" label="Spinning"></b-spinner>
+  <div v-else id="user">
+    <b-img
+      :src="user.images[0].url"
+      fluid
+      rounded
+      alt="Profile image"
+      id="user-profile-image"
+    ></b-img>
+    <b-jumbotron
+      id="user-profile-header"
+      :header="user.display_name"
+      header-level="4"
+    >
+      <b-container id="user-profile-summary">
+        <b-row align-h="center" cols-md="3">
+          <b-col>
+            playlists <br /><b>{{ playlistsTotal }}</b>
+          </b-col>
+          <b-col>
+            following
+            <br />
+            <b>{{ followingTotal }}</b>
+          </b-col>
+          <b-col>
+            followers
+            <br />
+            <b>{{ user.followers.total }}</b>
+          </b-col>
         </b-row>
       </b-container>
-    </div>
+    </b-jumbotron>
+    <b-container class="top-ten-lists-container">
+      <b-row>
+        <TopTen type="artists" />
+        <TopTen type="tracks" />
+      </b-row>
+    </b-container>
   </div>
 </template>
 

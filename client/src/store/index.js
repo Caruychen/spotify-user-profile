@@ -5,6 +5,7 @@ import profile from "./modules/profile.js";
 import playlists from "./modules/playlists.js";
 import follow from "./modules/follow.js";
 import top from "./modules/top.js";
+import recent from "./modules/recent.js";
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
     auth,
     playlists,
     follow,
-    top
+    top,
+    recent
   }
 });

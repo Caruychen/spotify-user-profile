@@ -2,7 +2,7 @@
   <b-spinner v-if="loading" label="Spinning"></b-spinner>
   <ul v-else>
     <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
-      <b-card class="overflow-hidden" id="top-ten-list-card">
+      <b-card class="overflow-hidden">
         <b-row>
           <b-col cols="3" xl="2">
             <b-card-img

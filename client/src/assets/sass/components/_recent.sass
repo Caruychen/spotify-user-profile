@@ -1,0 +1,75 @@
+#recent
+    padding: 4rem 1rem 6rem
+    text-align: left
+
+    ul
+        list-style-type: none
+        padding: 0 0.5rem
+        width: 100%
+
+        .card
+            height: 64px
+            background-color: $void-lighter
+            margin: 1rem 0
+            border: none
+
+            img
+                width: 64px
+                max-height: 64px
+    .card-body
+        padding: 0 20px
+        height: 100%
+        display: flex
+        flex-direction: column
+        justify-content: center
+        margin-right: -1.5rem
+
+        .card-title
+            font-size: 1rem
+            font-weight: 500
+            margin-bottom: 0.3rem
+        .card-text
+            font-size: 0.8rem
+                        
+    .card-body > *
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        
+    .card-body > *:hover, .card-body > *:focus
+        overflow: hidden-scroll
+        direction: rtl
+
+#recent-header
+    background-color: transparent
+    margin: 0
+    padding-bottom: 1.5rem
+
+    hr
+        border-color: $stark
+    h1
+        font-size: 1.8rem
+        margin-bottom: 1rem
+
+.item-duration
+    display: flex
+    align-items: center
+    justify-content: center
+    font-size: 0.9rem
+    opacity: 0.7
+    filter: alpha(opacity=70)
+
+@include media-breakpoint-up(sm)
+    #recent-header h1
+            font-size: 3rem
+    #recent ul
+            padding: 0
+
+@include media-breakpoint-up(md)
+    #recent
+        padding: 4rem 8rem 6rem
+
+@include media-breakpoint-up(xl)
+    #recent
+        .card-body
+            padding: 0
