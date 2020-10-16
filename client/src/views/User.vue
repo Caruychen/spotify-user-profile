@@ -8,13 +8,9 @@
       alt="Profile image"
       id="user-profile-image"
     ></b-img>
-    <b-jumbotron
-      id="user-profile-header"
-      :header="user.display_name"
-      header-level="4"
-    >
-      <b-container id="user-profile-summary">
-        <b-row align-h="center" cols-md="3">
+    <b-jumbotron :header="user.display_name" header-level="4">
+      <template v-slot:lead>
+        <b-row>
           <b-col>
             playlists <br /><b>{{ playlistsTotal }}</b>
           </b-col>
@@ -29,12 +25,13 @@
             <b>{{ user.followers.total }}</b>
           </b-col>
         </b-row>
-      </b-container>
+      </template>
     </b-jumbotron>
+    <UserPlayer />
     <b-container class="top-ten-lists-container">
       <b-row>
-        <TopTen type="artists" />
-        <TopTen type="tracks" />
+        <UserTopTen type="artists" />
+        <UserTopTen type="tracks" />
       </b-row>
     </b-container>
   </div>
@@ -42,7 +39,8 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-import TopTen from "@/components/TopTen.vue";
+import UserTopTen from "@/components/UserTopTen.vue";
+import UserPlayer from "@/components/UserPlayer.vue";
 
 export default {
   data() {
@@ -51,7 +49,8 @@ export default {
     };
   },
   components: {
-    TopTen
+    UserTopTen,
+    UserPlayer
   },
   computed: {
     ...mapState("profile", {
