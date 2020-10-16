@@ -1,16 +1,16 @@
 <template>
-  <b-card no-body class="overflow-hidden">
+  <b-card no-body class="overflow-hidden list-item-container">
     <b-row no-gutters>
-      <b-col cols="2" lg="1">
+      <b-col cols="2" :md="cols.outer">
         <b-card-img
           class="image-column rounded-0"
-          :src="item.album.image"
+          :src="item.image[item.image.length - 1].url"
           :alt="item.name"
         ></b-card-img>
       </b-col>
-      <b-col cols="8" lg="10">
+      <b-col cols="8" :md="cols.body">
         <b-card-body :title="item.name">
-          <b-card-text>
+          <b-card-text v-if="isTrack">
             <span v-for="(artist, index) in item.artists" :key="index">
               <a :href="artist.external_urls.spotify" target="_blank">{{
                 artist.name
@@ -22,7 +22,7 @@
           </b-card-text>
         </b-card-body>
       </b-col>
-      <b-col cols="2" lg="1" class="item-duration">
+      <b-col v-if="isTrack" cols="2" :md="cols.outer" class="item-duration">
         {{ item.duration | msToMinutes }}
       </b-col>
     </b-row>
@@ -32,16 +32,18 @@
 <script>
 export default {
   props: {
-    item: Object
+    item: Object,
+    isTrack: Boolean,
+    isSubColumn: Boolean
   },
-  filters: {
-    insertComma: function(text, index, length) {
-      return index === length - 1 ? "" : ", ";
-    },
-    msToMinutes: function(duration) {
-      const minutes = Math.floor(duration / 60000);
-      const seconds = ((duration % 60000) / 1000).toFixed(0);
-      return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  computed: {
+    cols: function() {
+      const total = 12;
+      const outer = this.isSubColumn ? 2 : 1;
+      return {
+        outer,
+        body: this.isTrack ? total - 2 * outer : total - outer
+      };
     }
   }
 };

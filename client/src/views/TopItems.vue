@@ -4,7 +4,7 @@
       <template v-slot:header
         >Top {{ $route.params.slug | capitalize }}</template
       >
-      <TimeRangeSelector
+      <BaseTimeRangeSelector
         version="button"
         @updateTimeRange="onTimeRangeUpdate"
       />
@@ -15,7 +15,7 @@
     </div>
     <div v-else class="top-items-container">
       <div
-        v-for="(item, index) in allItems($route.params.slug, timeRange)"
+        v-for="(item, index) in allTopItems($route.params.slug, timeRange)"
         :key="index"
         class="top-item"
       >
@@ -34,7 +34,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import TimeRangeSelector from "@/components/TimeRangeSelector.vue";
+import BaseTimeRangeSelector from "@/components/BaseTimeRangeSelector.vue";
 
 export default {
   data() {
@@ -50,11 +50,11 @@ export default {
     }
   },
   components: {
-    TimeRangeSelector
+    BaseTimeRangeSelector
   },
   computed: {
     ...mapGetters("top", {
-      allItems: "getAllTopItems"
+      allTopItems: "getAllTopItems"
     })
   },
   watch: {

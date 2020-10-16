@@ -9,7 +9,7 @@
     </div>
     <ul v-else>
       <li v-for="(item, index) in recentList" :key="index">
-        <TrackItem :item="item" />
+        <BaseListItem :item="item" :isTrack="true" />
       </li>
     </ul>
   </div>
@@ -17,7 +17,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import TrackItem from "@/components/TrackItem.vue";
+import BaseListItem from "@/components/BaseListItem.vue";
 
 export default {
   data() {
@@ -26,7 +26,7 @@ export default {
     };
   },
   components: {
-    TrackItem
+    BaseListItem
   },
   computed: {
     ...mapGetters("recent", {
