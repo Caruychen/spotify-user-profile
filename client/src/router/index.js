@@ -23,6 +23,7 @@ const routes = [
         props: true,
         component: () =>
           import(/* webpackChunkName: "topitems" */ "../views/TopItems.vue"),
+        meta: { requiresAuth: true },
         beforeEnter: (to, from, next) => {
           const test = ["artists", "tracks"];
           const exists = test.find(type => {
