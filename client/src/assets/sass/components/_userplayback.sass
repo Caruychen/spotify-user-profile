@@ -1,0 +1,32 @@
+#current-playback
+    margin-bottom: 5rem
+    .card
+        background-color: transparent
+        margin: auto
+
+        .card-header
+            background-color: $void-lighter
+            font-size: 0.9rem
+            font-weight: 500
+            p
+                color: $soft-blue-green
+
+    .card-img
+        -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1),rgba(0,0,0,1), rgba(0,0,0,0))
+
+    .card-body
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+        align-items: flex-start
+        padding-bottom: 0
+        height: 100%
+        text-align: left
+
+        .card-title
+            margin-bottom: 0.3rem
+
+        .card-text
+            font-size: 0.9rem
+            
