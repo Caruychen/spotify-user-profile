@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { filterTrack } from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -9,16 +10,7 @@ export default {
     getRecentList: state => {
       return state.items.map(item => {
         const track = item.track;
-        return {
-          name: track.name,
-          artists: track.artists,
-          album: {
-            name: track.album.name,
-            image: track.album.images[track.album.images.length - 1].url,
-            spotifyUrl: track.album.external_urls.spotify
-          },
-          duration: track.duration_ms
-        };
+        return filterTrack(track);
       });
     }
   },

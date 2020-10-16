@@ -1,6 +1,6 @@
 import Vue from "vue";
 import querystring from "query-string";
-import helpers from "@/store/helpers/helpers.js";
+import { filterArtist, filterTrack } from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -9,15 +9,13 @@ export default {
     tracks: {}
   },
   getters: {
-    getTopTen: state => (type, timeRange) => {
-      return state[type][timeRange].slice(0, 10).map(item => {
-        return helpers.filterItem(item, type);
-      });
-    },
     getAllTopItems: state => (type, timeRange) => {
       return state[type][timeRange].map(item => {
-        return helpers.filterItem(item, type);
+        return type === "artists" ? filterArtist(item) : filterTrack(item);
       });
+    },
+    getTopTen: (state, getters) => (type, timeRange) => {
+      return getters.getAllTopItems(type, timeRange).slice(0, 10);
     }
   },
   mutations: {
