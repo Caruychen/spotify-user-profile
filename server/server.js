@@ -5,7 +5,7 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 let REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:8081/callback';
 let FRONTEND_URI = process.env.FRONTEND_URI || 'http://localhost:8080';
 const PORT = process.env.PORT || 8081;
-const scope = "user-read-private user-read-email playlist-read-private playlist-read-collaborative user-follow-read user-top-read user-read-recently-played";
+const scope = "user-read-private user-read-email playlist-read-private playlist-read-collaborative user-follow-read user-top-read user-read-recently-played user-read-playback-state";
 
 if (process.env.NODE_ENV !== 'production') {
     REDIRECT_URI = 'http://localhost:8081/callback';
