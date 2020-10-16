@@ -1,0 +1,76 @@
+<template>
+  <b-col md="6" class="top-ten-container">
+    <b-container class="top-ten-heading">
+      <b-row align-v="center">
+        <b-col
+          ><h2>Top 10 {{ type | capitalize }}</h2></b-col
+        >
+        <b-col
+          ><BaseTimeRangeSelector @updateTimeRange="onTimeRangeUpdate"
+        /></b-col>
+      </b-row>
+    </b-container>
+    <b-spinner v-if="loading" label="Spinning"></b-spinner>
+    <ul v-else>
+      <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
+        <BaseListItem
+          :item="item"
+          :isTrack="type === 'tracks'"
+          :isSubColumn="true"
+        />
+      </li>
+    </ul>
+  </b-col>
+</template>
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+import BaseTimeRangeSelector from "@/components/BaseTimeRangeSelector.vue";
+import BaseListItem from "@/components/BaseListItem.vue";
+
+export default {
+  data() {
+    return {
+      loading: false,
+      timeRange: "long_term"
+    };
+  },
+  props: {
+    type: String
+  },
+  components: {
+    BaseTimeRangeSelector,
+    BaseListItem
+  },
+  computed: {
+    ...mapGetters("top", {
+      topTen: "getTopTen"
+    })
+  },
+  watch: {
+    timeRange: function() {
+      this.loadTopItems();
+    }
+  },
+  methods: {
+    ...mapActions({
+      fetchTopItems: "top/fetchTopItems"
+    }),
+    loadTopItems: async function() {
+      this.loading = true;
+      const params = {
+        type: this.type,
+        timeRange: this.timeRange
+      };
+      await this.fetchTopItems(params);
+      this.loading = false;
+    },
+    onTimeRangeUpdate(timeRange) {
+      this.timeRange = timeRange;
+    }
+  },
+  created() {
+    this.loadTopItems();
+  }
+};
+</script>
