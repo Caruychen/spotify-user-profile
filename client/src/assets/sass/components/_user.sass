@@ -1,26 +1,30 @@
 #user
-    padding: 5rem 0
+    padding: 5rem 1.5rem
     
     #user-profile-image
         max-width: 150px
 
-    #user-profile-header
+    .jumbotron
         background-color: transparent
         color: $stark
         padding-top: 2rem
-        margin-bottom: -2rem
-        
-        .container
-            padding-top: 2rem
+
+        .lead
+            padding: 2rem 0
+            margin: auto
         b
             color: $soft-green
             font-size: 1.5rem
+            
+.top-ten-lists-container
+    padding: 0
 
 @include media-breakpoint-up(md)
-    #user-profile-header .container
-        max-width: 500px
-    .top-ten-lists-container
-        max-width: 700px
+    #user
+        .jumbotron .lead
+            max-width: 500px
+        .top-ten-lists-container
+            max-width: 700px
     
 @include media-breakpoint-up(lg)
     .top-ten-lists-container
