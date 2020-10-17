@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { spotifyHTTP } from "@/service/index.js";
 
 export default {
   namespaced: true,
@@ -17,9 +17,7 @@ export default {
   },
   actions: {
     fetchPlaylists: async ({ commit }) => {
-      const playlists = await Vue.axios.get(
-        "https://api.spotify.com/v1/me/playlists"
-      );
+      const playlists = await spotifyHTTP.get("playlists");
       if (playlists.status === 200) {
         commit("setPlaylists", playlists.data);
       }

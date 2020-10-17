@@ -79,7 +79,9 @@ export default {
 
         this.loading = false;
       } catch (error) {
-        console.log(`${error} - ${error.response.data.error.message}`);
+        console.error(
+          `${error} in User.vue - ${error.response.data.error.message}`
+        );
       }
     })();
   }

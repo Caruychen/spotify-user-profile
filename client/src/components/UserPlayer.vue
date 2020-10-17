@@ -42,11 +42,7 @@ export default {
   },
   created() {
     (async () => {
-      try {
-        await this.fetchPlayback();
-      } catch (error) {
-        console.log(`${error} - ${error.response.data.error.message}`);
-      }
+      this.fetchPlayback();
     })();
   },
   mounted() {

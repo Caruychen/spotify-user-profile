@@ -1,5 +1,6 @@
-import Vue from "vue";
+// import Vue from "vue";
 import querystring from "query-string";
+import { spotifyHTTP } from "@/service/index.js";
 
 export default {
   namespaced: true,
@@ -18,14 +19,20 @@ export default {
   },
   actions: {
     fetchFollowing: async ({ commit }, type) => {
-      const following = await Vue.axios.get(
-        "https://api.spotify.com/v1/me/following?" +
-          querystring.stringify({
-            type
-          })
-      );
-      if (following.status === 200) {
-        commit("setFollowing", following.data.artists);
+      try {
+        const following = await spotifyHTTP.get(
+          "following?" +
+            querystring.stringify({
+              type
+            })
+        );
+        if (following.status === 200) {
+          commit("setFollowing", following.data.artists);
+        }
+      } catch (error) {
+        console.error(
+          `${error} in follow.js - ${error.response.data.error.error_description}`
+        );
       }
     }
   }

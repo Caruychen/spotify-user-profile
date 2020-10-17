@@ -6,6 +6,7 @@ import playlists from "./modules/playlists.js";
 import follow from "./modules/follow.js";
 import top from "./modules/top.js";
 import recent from "./modules/recent.js";
+import player from "./modules/player.js";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     playlists,
     follow,
     top,
-    recent
+    recent,
+    player
   }
 });

@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { spotifyHTTP } from "@/service/index.js";
 import { filterTrack } from "@/store/helpers/helpers.js";
 
 export default {
@@ -21,9 +21,7 @@ export default {
   },
   actions: {
     fetchRecentItems: async ({ commit }) => {
-      const recent = await Vue.axios.get(
-        "https://api.spotify.com/v1/me/player/recently-played"
-      );
+      const recent = await spotifyHTTP.get("player/recently-played");
       if (recent.status === 200) {
         commit("setRecentItems", recent.data.items);
       }

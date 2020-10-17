@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { spotifyHTTP } from "@/service/index.js";
 import querystring from "query-string";
 import { filterArtist, filterTrack } from "@/store/helpers/helpers.js";
 
@@ -27,8 +27,8 @@ export default {
     fetchTopItems: async ({ state, commit }, params) => {
       if (!state[params.type][params.timeRange]) {
         const limit = 50;
-        const topItems = await Vue.axios.get(
-          "https://api.spotify.com/v1/me/top/" +
+        const topItems = await spotifyHTTP.get(
+          "top/" +
             params.type +
             "?" +
             querystring.stringify({
