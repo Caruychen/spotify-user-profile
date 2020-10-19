@@ -35,7 +35,7 @@ export default {
         localStorage.access_token = response.data.access_token;
         commit("setRefreshing", false);
         commit("setRefreshingCall", null);
-        return Promise.resolve(response.status);
+        return Promise.resolve(true);
       } catch (error) {
         console.error(
           `${error} in auth.js - ${error.response.data.error.error_description}`

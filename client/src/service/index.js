@@ -13,7 +13,7 @@ spotifyHTTP.interceptors.response.use(
     return response;
   },
   async error => {
-    const status = error.response.status;
+    const status = error.response ? error.response.status : null;
     const originalConfig = error.config;
     // Capture authentication error - return to login
     if (status === 400) {
@@ -23,8 +23,8 @@ spotifyHTTP.interceptors.response.use(
     }
     // Uses refresh token if access token invalid or expired
     if (status === 401) {
-      const refreshStatus = await store.dispatch("auth/refreshCall");
-      if (refreshStatus === 200) {
+      const refreshStatus = await store.dispatch("auth/tokenRefresh");
+      if (refreshStatus) {
         spotifyHTTP.defaults.headers.common["Authorization"] =
           "Bearer " + localStorage.access_token;
         originalConfig.headers.Authorization =
