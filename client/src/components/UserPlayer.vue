@@ -1,9 +1,6 @@
 <template>
   <div id="current-playback">
     <b-card v-if="nowPlaying" no-body>
-      <!-- <template v-slot:header>
-        <p class="mb-0">Listening on: {{ nowPlaying.device }}</p>
-      </template> -->
       <b-card-img :src="nowPlaying.item.image[0].url"></b-card-img>
       <b-card-body overlay>
         <b-card-title>{{ nowPlaying.item.name }}</b-card-title>
@@ -16,28 +13,42 @@
               artist.name | insertComma(index, nowPlaying.item.artists.length)
             }}
           </span>
+          <span class="device-text">{{ nowPlaying.device }}</span>
         </b-card-text>
+        <UserPlayerSlider />
+        <UserPlayerController />
       </b-card-body>
     </b-card>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
+import UserPlayerSlider from "@/components/UserPlayerSlider.vue";
+import UserPlayerController from "@/components/UserPlayerController.vue";
+
 export default {
   data() {
     return {
       timer: null
     };
   },
+  components: {
+    UserPlayerSlider,
+    UserPlayerController
+  },
   computed: {
+    ...mapState("player", {
+      isFetchPaused: state => state.isFetchPaused
+    }),
     ...mapGetters("player", {
       nowPlaying: "currentDevicePlayback"
     })
   },
   methods: {
-    ...mapActions({
-      fetchPlayback: "player/fetchCurrentPlayback"
+    ...mapActions("player", {
+      fetchPlayback: "fetchCurrentPlayback",
+      seekPosition: "seekPosition"
     })
   },
   created() {
@@ -47,7 +58,9 @@ export default {
   },
   mounted() {
     this.timer = setInterval(async () => {
-      this.fetchPlayback();
+      if (!this.isFetchPaused) {
+        this.fetchPlayback();
+      }
     }, 1000);
   },
   destroyed() {
