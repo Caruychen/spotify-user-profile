@@ -6,7 +6,7 @@ const backendHTTP = axios.create({ baseURL: "http://localhost:8081/" });
 const spotifyHTTP = axios.create({ baseURL: "https://api.spotify.com/v1/me/" });
 
 spotifyHTTP.defaults.headers.common["Authorization"] =
-  "Bearer " + localStorage.access_token;
+  "Bearer " + localStorage.getItem("access_token");
 
 spotifyHTTP.interceptors.response.use(
   response => {
@@ -15,20 +15,18 @@ spotifyHTTP.interceptors.response.use(
   async error => {
     const status = error.response ? error.response.status : null;
     const originalConfig = error.config;
-    // Capture authentication error - return to login
+    // Return to login if Bad Request
     if (status === 400) {
       router.push({
         name: "Login"
       });
     }
-    // Uses refresh token if access token invalid or expired
+    // Uses refresh token when access code is unauthorized
     if (status === 401) {
       const refreshStatus = await store.dispatch("auth/tokenRefresh");
       if (refreshStatus) {
-        spotifyHTTP.defaults.headers.common["Authorization"] =
-          "Bearer " + localStorage.access_token;
         originalConfig.headers.Authorization =
-          "Bearer " + localStorage.access_token;
+          "Bearer " + localStorage.getItem("access_token");
         return spotifyHTTP(originalConfig);
       }
     }

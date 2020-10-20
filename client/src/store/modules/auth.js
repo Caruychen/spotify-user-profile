@@ -1,4 +1,4 @@
-import { backendHTTP } from "@/service/index.js";
+import { backendHTTP, spotifyHTTP } from "@/service/index.js";
 import router from "@/router";
 
 export default {
@@ -17,6 +17,7 @@ export default {
   },
   actions: {
     tokenRefresh: ({ state, commit, dispatch }) => {
+      // Return token refresh promise, and direct concurrent refresh calls to state holding the returned promise
       if (state.isRefreshing) {
         return state.refreshingCall;
       }
@@ -33,6 +34,8 @@ export default {
           }
         });
         localStorage.access_token = response.data.access_token;
+        spotifyHTTP.defaults.headers.common["Authorization"] =
+          "Bearer " + response.data.access_token;
         commit("setRefreshing", false);
         commit("setRefreshingCall", null);
         return Promise.resolve(true);

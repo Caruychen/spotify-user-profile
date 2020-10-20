@@ -73,8 +73,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // Triggered when callback returns with tokens
   if (to.query.access_token) {
-    localStorage.access_token = to.query.access_token;
-    localStorage.refresh_token = to.query.refresh_token;
+    localStorage.setItem("access_token", to.query.access_token);
+    localStorage.setItem("refresh_token", to.query.refresh_token);
 
     next({
       path: "/"
