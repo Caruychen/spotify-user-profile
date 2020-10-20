@@ -1,5 +1,5 @@
 #current-playback
-    margin-bottom: 5rem
+    margin-bottom: 10rem
     .card
         background-color: transparent
         margin: auto
@@ -13,7 +13,7 @@
 
     .card-img
         -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
-        mask-image: linear-gradient(to bottom, rgba(0,0,0,1),rgba(0,0,0,1), rgba(0,0,0,0))
+        mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%,rgba(0,0,0,0))
 
     .card-body
         display: flex
@@ -21,7 +21,7 @@
         justify-content: flex-end
         align-items: flex-start
         padding-bottom: 0
-        height: 100%
+        height: 130%
         text-align: left
 
         .card-title
@@ -29,4 +29,62 @@
 
         .card-text
             font-size: 0.9rem
-            
+            margin-bottom: 0.75rem
+
+            .device-text
+                display: block
+                color: $soft-blue-green
+                font-size: 0.8rem
+                padding-top: 0.2rem
+
+.slider-container
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+
+    .slider-range
+        -webkit-appearance: none
+        appearance: none
+        width: 100%
+        height: 0.4rem
+        outline: none
+        border-radius: 1rem
+        cursor: pointer
+
+    .slider-range::-webkit-slider-thumb
+        -webkit-appearance: none
+        appearance: none
+        width: 0.8rem
+        height: 0.8rem
+        border-radius: 1rem
+        background: $stark-dark
+        cursor: pointer
+
+    .slider-range:hover::-webkit-slider-thumb
+        background: $stark
+
+    p
+        font-size: 0.8rem
+        padding-top: 0.25rem
+        margin: 0
+
+.player-controller
+    align-self: center
+    color: $stark
+    font-size: 2rem
+
+    .col > svg
+        opacity: 0.7
+        filter: alpha(opacity=70)
+        transition: 0.2s
+    .col > svg:hover 
+        opacity: 1
+        filter: alpha(opacity=100)
+
+@include media-breakpoint-up(md)
+    #current-playback
+        .card
+            max-width: 50vw
+        .card-body
+            height: 110%
