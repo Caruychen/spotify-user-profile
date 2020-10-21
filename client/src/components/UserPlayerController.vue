@@ -1,11 +1,11 @@
 <template>
-  <b-row class="player-controller">
-    <b-col>
+  <b-row class="player-controller" align-h="center">
+    <b-col cols="3" lg="1">
       <b-icon-skip-start-fill
         @click="playController('previous')"
       ></b-icon-skip-start-fill>
     </b-col>
-    <b-col>
+    <b-col cols="3" lg="1" class="pause-play">
       <b-icon-pause-fill
         v-if="isPlaying"
         @click="playController('pause')"
@@ -15,7 +15,7 @@
         @click="playController('play')"
       ></b-icon-play-fill>
     </b-col>
-    <b-col>
+    <b-col cols="3" lg="1">
       <b-icon-skip-end-fill
         @click="playController('next')"
       ></b-icon-skip-end-fill>

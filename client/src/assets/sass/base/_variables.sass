@@ -13,6 +13,7 @@ $stark-dark: #9c9795
 $soft-green: #5fa088
 $blue-green: #21B6A8
 $soft-blue-green: #48ada3
+$spotify-green: #1DB954
 
 
 // Buttons
@@ -39,6 +40,29 @@ $soft-blue-green: #48ada3
     margin: 4px auto -6px
     width: 2.5rem
     border-bottom: 2.5px solid $soft-green
+
+.btn-spotify-button
+    @extend .btn
+    font-weight: 500
+    color: #fff
+    background-color: $spotify-green
+    padding: 1rem 2rem
+    border-radius: 5rem
+    opacity: 0.8
+    filter: alpha(opacity=80)
+    transition: 0.1s ease-in
+
+.btn-spotify-button:hover
+    color: #FFF
+    background-color: $spotify-green
+    transform: scale(1.05)
+    opacity: 1
+    filter: alpha(opacity=100)
+
+.btn-spotify-button:active, .btn-spotify-button.active
+    opacity: 0.6
+    filter: alpha(opacity=60)
+    transform: scale(1)
 
 // Dropdowns
 .btn-custom-dropdown

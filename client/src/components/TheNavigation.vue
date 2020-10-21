@@ -36,6 +36,11 @@
       <br />
       Recent
     </router-link>
+    <router-link class="nav-link" to="/login">
+      <b-icon-box-arrow-right></b-icon-box-arrow-right>
+      <br />
+      Log out
+    </router-link>
   </nav>
 </template>
 
@@ -46,6 +51,12 @@ export default {
     ...mapState({
       topViews: state => state.topTypes
     })
+  },
+  methods: {
+    logOut() {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+    }
   }
 };
 </script>

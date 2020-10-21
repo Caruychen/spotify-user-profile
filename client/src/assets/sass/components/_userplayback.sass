@@ -1,15 +1,16 @@
 #current-playback
-    margin-bottom: 10rem
+    margin: 0 auto 5rem
+
     .card
         background-color: transparent
-        margin: auto
+        border: none
+        margin-bottom: 2rem
 
-        .card-header
-            background-color: $void-lighter
-            font-size: 0.9rem
+    .card-header
+        background-color: $void-lighter
+        p
+            margin: 0
             font-weight: 500
-            p
-                color: $soft-blue-green
 
     .card-img
         -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
@@ -20,8 +21,6 @@
         flex-direction: column
         justify-content: flex-end
         align-items: flex-start
-        padding-bottom: 0
-        height: 130%
         text-align: left
 
         .card-title
@@ -29,7 +28,6 @@
 
         .card-text
             font-size: 0.9rem
-            margin-bottom: 0.75rem
 
             .device-text
                 display: block
@@ -37,8 +35,11 @@
                 font-size: 0.8rem
                 padding-top: 0.2rem
 
+.btn-spotify-button
+    margin: 1rem auto 4rem
+    
 .slider-container
-    width: 100%
+    padding: 0 1rem
     display: flex
     flex-wrap: wrap
     justify-content: space-between
@@ -70,21 +71,35 @@
         margin: 0
 
 .player-controller
-    align-self: center
     color: $stark
     font-size: 2rem
 
-    .col > svg
+    & > * > svg
         opacity: 0.7
         filter: alpha(opacity=70)
         transition: 0.2s
-    .col > svg:hover 
+        cursor: pointer
+    & > * > svg:hover 
         opacity: 1
         filter: alpha(opacity=100)
+        transform: scale(1.1)
+    & > * > svg:active
+        transform: scale(1)
+        opacity: 0.7
+        filter: alpha(opacity=60)
+    .pause-play
+        transform: scale(1.5)
 
 @include media-breakpoint-up(md)
     #current-playback
+        max-width: 700px
         .card
-            max-width: 50vw
-        .card-body
-            height: 110%
+            margin-bottom: 1rem
+            background-color: $void-lighter
+        .card-img
+            -webkit-mask-image: none
+            mask-image: none
+
+    .slider-container
+        padding: 0
+    
