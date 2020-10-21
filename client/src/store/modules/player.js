@@ -72,7 +72,7 @@ export default {
         }
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log("Request cancelled", error);
+          // console.log("Request cancelled", error);
         } else {
           console.error(
             `${error} in player.js fetchCurrentPlayback - ${error.response.data.error.message}`
