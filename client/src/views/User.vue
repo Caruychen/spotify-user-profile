@@ -11,18 +11,19 @@
     <b-jumbotron :header="user.display_name" header-level="4">
       <template v-slot:lead>
         <b-row>
-          <b-col>
-            playlists <br /><b>{{ playlistsTotal }}</b>
+          <b-col tag="span">
+            <b>{{ playlistsTotal }}</b
+            ><br />playlists
           </b-col>
-          <b-col>
-            following
-            <br />
+          <b-col tag="span">
             <b>{{ followingTotal }}</b>
-          </b-col>
-          <b-col>
-            followers
             <br />
+            following
+          </b-col>
+          <b-col tag="span">
             <b>{{ user.followers.total }}</b>
+            <br />
+            followers
           </b-col>
         </b-row>
       </template>
