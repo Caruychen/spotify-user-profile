@@ -3,7 +3,7 @@
     <b-container class="top-ten-heading">
       <b-row align-v="center">
         <b-col
-          ><h2>Top 10 {{ type | capitalize }}</h2></b-col
+          ><h3>Top 10 {{ type | capitalize }}</h3></b-col
         >
         <b-col
           ><BaseTimeRangeSelector @updateTimeRange="onTimeRangeUpdate"
@@ -13,7 +13,7 @@
     <b-spinner v-if="loading" label="Spinning"></b-spinner>
     <ul v-else>
       <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
-        <BaseListItem
+        <BaseListCard
           :item="item"
           :isTrack="type === 'tracks'"
           :isSubColumn="true"
@@ -26,7 +26,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import BaseTimeRangeSelector from "@/components/BaseTimeRangeSelector.vue";
-import BaseListItem from "@/components/BaseListItem.vue";
+import BaseListCard from "@/components/BaseListCard.vue";
 
 export default {
   data() {
@@ -40,7 +40,7 @@ export default {
   },
   components: {
     BaseTimeRangeSelector,
-    BaseListItem
+    BaseListCard
   },
   computed: {
     ...mapGetters("top", {

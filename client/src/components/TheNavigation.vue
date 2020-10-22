@@ -36,11 +36,11 @@
       <br />
       Recent
     </router-link>
-    <router-link class="nav-link" to="/login">
+    <!-- <router-link class="nav-link" to="/login">
       <b-icon-box-arrow-right></b-icon-box-arrow-right>
       <br />
       Log out
-    </router-link>
+    </router-link> -->
   </nav>
 </template>
 

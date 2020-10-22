@@ -29,7 +29,8 @@
       </template>
     </b-jumbotron>
     <UserPlayer />
-    <b-container class="top-ten-lists-container">
+    <UserDashboard />
+    <b-container id="top-ten-lists">
       <b-row>
         <UserTopTen type="artists" />
         <UserTopTen type="tracks" />
@@ -42,6 +43,7 @@
 import { mapState, mapGetters, mapActions } from "vuex";
 import UserTopTen from "@/components/UserTopTen.vue";
 import UserPlayer from "@/components/UserPlayer.vue";
+import UserDashboard from "@/components/UserDashboard.vue";
 
 export default {
   data() {
@@ -51,7 +53,8 @@ export default {
   },
   components: {
     UserTopTen,
-    UserPlayer
+    UserPlayer,
+    UserDashboard
   },
   computed: {
     ...mapState("profile", {
