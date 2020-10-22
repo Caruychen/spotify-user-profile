@@ -7,6 +7,7 @@ import follow from "./modules/follow.js";
 import top from "./modules/top.js";
 import recent from "./modules/recent.js";
 import player from "./modules/player.js";
+import features from "./modules/features.js";
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     follow,
     top,
     recent,
-    player
+    player,
+    features
   }
 });

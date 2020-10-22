@@ -21,7 +21,7 @@ export default {
     fetchFollowing: async ({ commit }, type) => {
       try {
         const following = await spotifyHTTP.get(
-          "following?" +
+          "me/following?" +
             querystring.stringify({
               type
             })

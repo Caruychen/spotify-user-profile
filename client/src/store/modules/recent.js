@@ -21,7 +21,7 @@ export default {
   },
   actions: {
     fetchRecentItems: async ({ commit }) => {
-      const recent = await spotifyHTTP.get("player/recently-played");
+      const recent = await spotifyHTTP.get("me/player/recently-played");
       if (recent.status === 200) {
         commit("setRecentItems", recent.data.items);
       }

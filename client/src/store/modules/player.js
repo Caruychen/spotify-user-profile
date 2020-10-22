@@ -57,7 +57,7 @@ export default {
     fetchCurrentPlayback: async ({ commit, state }) => {
       try {
         // Add cancellable token
-        const playback = await spotifyHTTP.get("player", {
+        const playback = await spotifyHTTP.get("me/player", {
           cancelToken: state.source.token
         });
         if (playback.status === 200 && playback.data) {
@@ -85,7 +85,7 @@ export default {
         commit("cancelRequests");
         commit("setNewProgress", position);
         await spotifyHTTP.put(
-          "player/seek?" +
+          "me/player/seek?" +
             querystring.stringify({
               position_ms: position
             })
@@ -102,9 +102,9 @@ export default {
         commit("cancelRequests");
         if (input === "play" || input === "pause") {
           commit("switchIsPlaying");
-          await spotifyHTTP.put("player/" + input);
+          await spotifyHTTP.put("me/player/" + input);
         } else {
-          await spotifyHTTP.post("player/" + input);
+          await spotifyHTTP.post("me/player/" + input);
         }
         commit("resetCancelToken");
         dispatch("fetchCurrentPlayback");

@@ -12,7 +12,7 @@ export default {
   },
   actions: {
     fetchUserProfile: async ({ commit }) => {
-      const userProfile = await spotifyHTTP.get();
+      const userProfile = await spotifyHTTP.get("me");
       if (userProfile.status === 200) {
         commit("setUserProfile", userProfile.data);
       }

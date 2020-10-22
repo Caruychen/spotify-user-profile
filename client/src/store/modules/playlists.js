@@ -17,7 +17,7 @@ export default {
   },
   actions: {
     fetchPlaylists: async ({ commit }) => {
-      const playlists = await spotifyHTTP.get("playlists");
+      const playlists = await spotifyHTTP.get("me/playlists");
       if (playlists.status === 200) {
         commit("setPlaylists", playlists.data);
       }

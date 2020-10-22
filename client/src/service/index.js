@@ -3,7 +3,7 @@ import router from "@/router";
 import store from "@/store";
 
 const backendHTTP = axios.create({ baseURL: "http://localhost:8081/" });
-const spotifyHTTP = axios.create({ baseURL: "https://api.spotify.com/v1/me/" });
+const spotifyHTTP = axios.create({ baseURL: "https://api.spotify.com/v1/" });
 
 spotifyHTTP.defaults.headers.common["Authorization"] =
   "Bearer " + localStorage.getItem("access_token");

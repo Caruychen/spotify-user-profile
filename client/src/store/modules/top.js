@@ -28,7 +28,7 @@ export default {
       if (!state[params.type][params.timeRange]) {
         const limit = 50;
         const topItems = await spotifyHTTP.get(
-          "top/" +
+          "me/top/" +
             params.type +
             "?" +
             querystring.stringify({
