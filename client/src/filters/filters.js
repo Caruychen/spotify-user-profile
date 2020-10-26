@@ -1,9 +1,17 @@
 import Vue from "vue";
 
-Vue.filter("capitalize", text => {
+Vue.filter("capitalize", (text, index) => {
   if (!text) return "";
-  text = text.toString();
-  return text.charAt(0).toUpperCase() + text.slice(1);
+  text = text.toString().split(" ");
+  if (!index || index >= text.length || index < 0) {
+    index = 0;
+  }
+  text.splice(
+    index,
+    1,
+    text[index].charAt(0).toUpperCase() + text[index].slice(1)
+  );
+  return text.join(" ");
 });
 
 Vue.filter("insertComma", (text, index, length) => {

@@ -31,6 +31,7 @@
     <UserPlayer />
     <UserDashboard />
     <b-container id="top-ten-lists">
+      <h2>Your top 10</h2>
       <b-row>
         <UserTopTen type="artists" />
         <UserTopTen type="tracks" />

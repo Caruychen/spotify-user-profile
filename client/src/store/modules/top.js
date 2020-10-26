@@ -5,12 +5,20 @@ import { filterArtist, filterTrack } from "@/store/helpers/helpers.js";
 export default {
   namespaced: true,
   state: {
-    artists: {},
-    tracks: {}
+    artists: {
+      long_term: { items: null, isFetching: false, fetchCall: null },
+      medium_term: { items: null, isFetching: false, fetchCall: null },
+      short_term: { items: null, isFetching: false, fetchCall: null }
+    },
+    tracks: {
+      long_term: { items: null, isFetching: false, fetchCall: null },
+      medium_term: { items: null, isFetching: false, fetchCall: null },
+      short_term: { items: null, isFetching: false, fetchCall: null }
+    }
   },
   getters: {
     getAllTopItems: state => (type, timeRange) => {
-      return state[type][timeRange].map(item => {
+      return state[type][timeRange].items.map(item => {
         return type === "artists" ? filterArtist(item) : filterTrack(item);
       });
     },
@@ -20,29 +28,56 @@ export default {
   },
   mutations: {
     setTopItems(state, topItems) {
-      state[topItems.type][topItems.timeRange] = topItems.items;
+      state[topItems.type][topItems.timeRange].items = topItems.items;
+    },
+    setFetching(state, payload) {
+      state[payload.type][payload.timeRange].isFetching = payload.status;
+    },
+    setFetchingCall(state, payload) {
+      state[payload.type][payload.timeRange].fetchCall = payload.fetchCall;
     }
   },
   actions: {
-    fetchTopItems: async ({ state, commit }, params) => {
-      if (!state[params.type][params.timeRange]) {
-        const limit = 50;
-        const topItems = await spotifyHTTP.get(
-          "me/top/" +
-            params.type +
-            "?" +
-            querystring.stringify({
-              limit,
-              time_range: params.timeRange
-            })
-        );
-        if (topItems.status === 200) {
-          commit("setTopItems", {
-            items: topItems.data.items,
-            type: params.type,
-            timeRange: params.timeRange
-          });
+    fetchTopItems: ({ state, commit, dispatch }, params) => {
+      const category = state[params.type][params.timeRange];
+      if (category.isFetching) {
+        return category.fetchCall;
+      }
+      commit("setFetching", { ...params, status: true });
+      const topTenCall = dispatch("topItemsCall", { ...params });
+      commit("setFetchingCall", { ...params, fetchCall: topTenCall });
+      return topTenCall;
+    },
+    topItemsCall: async ({ state, commit }, { type, timeRange }) => {
+      try {
+        const category = state[type][timeRange];
+        if (!category.items) {
+          const limit = 50;
+          const topItems = await spotifyHTTP.get(
+            "me/top/" +
+              type +
+              "?" +
+              querystring.stringify({
+                limit,
+                time_range: timeRange
+              })
+          );
+          if (topItems.status === 200) {
+            commit("setTopItems", {
+              items: topItems.data.items,
+              type,
+              timeRange
+            });
+          }
+          commit("setFetching", { type, timeRange, status: false });
+          commit("setFetchingCall", { type, timeRange, fetchCall: null });
+          return Promise.resolve(true);
         }
+      } catch (error) {
+        console.error(
+          `${error} in auth.js - ${error.response.data.error.error_description}`
+        );
+        return Promise.reject(error);
       }
     }
   }
