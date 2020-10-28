@@ -1,7 +1,28 @@
 #dashboard
+    hr
+        border-bottom: 1px solid $stark
+        margin-bottom: 0
+
     .dashboard-container
         display: flex
         flex-wrap: wrap
+        justify-content: center
+        align-items: center
+        .grid-container
+            flex: 1 1 50%
+            display: grid
+            grid-template-columns: auto auto
+            grid-row-gap: 2rem
 
-    .feature-histogram
-        flex-basis: 100%
+            .grid-item
+                text-align: left
+            h3
+                font-size: 1.25rem
+            p
+
+        .ring-chart
+            flex: 1 1 50%
+            // width: 300px
+
+        .feature-histogram
+            flex-basis: 100%
