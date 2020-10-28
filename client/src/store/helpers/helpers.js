@@ -35,4 +35,26 @@ function filterEpisode(item) {
   };
 }
 
-export { filterArtist, filterTrack, filterEpisode };
+function splitColors(colorArray, index, arrayLength) {
+  const groups = colorArray.length - 1;
+  const groupMaxSize = Math.ceil(arrayLength / groups);
+  const colorIndex = Math.floor(index / groupMaxSize);
+  const upperPortion = index < groupMaxSize ? index : index % (colorIndex * groupMaxSize);
+  const lowerPortion = groupMaxSize - upperPortion;
+  const lower = [
+    parseInt(colorArray[colorIndex].substring(1, 3), 16) * lowerPortion,
+    parseInt(colorArray[colorIndex].substring(3, 5), 16) * lowerPortion,
+    parseInt(colorArray[colorIndex].substring(5), 16) * lowerPortion
+  ]
+  const upper = [
+    parseInt(colorArray[colorIndex+1].substring(1, 3), 16) * upperPortion,
+    parseInt(colorArray[colorIndex+1].substring(3, 5), 16) * upperPortion,
+    parseInt(colorArray[colorIndex+1].substring(5), 16) * upperPortion
+  ]
+  const result = lower.map((item, index) => {
+    return Math.round((item + upper[index]) / groupMaxSize).toString(16)
+  })
+  return `#${result.join("")}`
+}
+
+export { filterArtist, filterTrack, filterEpisode, splitColors };
