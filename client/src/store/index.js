@@ -8,6 +8,7 @@ import top from "./modules/top.js";
 import recent from "./modules/recent.js";
 import player from "./modules/player.js";
 import features from "./modules/features.js";
+import chartconfigs from "./modules/chartconfigs.js";
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     top,
     recent,
     player,
-    features
+    features,
+    chartconfigs
   }
 });
