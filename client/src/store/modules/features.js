@@ -65,25 +65,34 @@ export default {
         }
       ];
     },
-    keys: state => timeRange => {
-      const keyCounts = [];
+    valueCount: state => (type, timeRange) => {
+      const countArray = [];
       state.audioFeatures[timeRange].forEach(item => {
-        const index = item.key;
-        let diff = index - keyCounts.length;
+        const index = item[type];
+        let diff = index - countArray.length;
         if (diff < 0) {
-          keyCounts[index].values[0]++;
+          countArray[index].values[0]++;
         } else {
           while (diff > 0) {
-            keyCounts.push({
+            countArray.push({
               values: [0],
-              text: state.keyMap[keyCounts.length]
+              text:
+                type === "key"
+                  ? state.keyMap[countArray.length]
+                  : `${countArray.length}/${countArray.length > 4 ? "8" : "4"}`
             });
             diff--;
           }
-          keyCounts.push({ values: [1], text: state.keyMap[index] });
+          countArray.push({
+            values: [1],
+            text:
+              type === "key"
+                ? state.keyMap[index]
+                : `${index}/${index > 4 ? "8" : "4"}`
+          });
         }
       });
-      return keyCounts;
+      return countArray;
     }
   },
   mutations: {
