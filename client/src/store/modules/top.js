@@ -24,6 +24,18 @@ export default {
     },
     getTopTen: (state, getters) => (type, timeRange) => {
       return getters.getAllTopItems(type, timeRange).slice(0, 10);
+    },
+    avgPopularity: state => (type, timeRange) => {
+      const popularityNumerator = state[type][timeRange].items
+        .map(item => {
+          return item.popularity;
+        })
+        .reduce((acc, cur) => acc + cur);
+      const average = Math.round(popularityNumerator / state[type][timeRange].items.length);
+      return {
+        average,
+        total: state[type][timeRange].items.length
+      }
     }
   },
   mutations: {
@@ -73,6 +85,7 @@ export default {
           commit("setFetchingCall", { type, timeRange, fetchCall: null });
           return Promise.resolve(true);
         }
+        return Promise.resolve(true);
       } catch (error) {
         console.error(
           `${error} in auth.js - ${error.response.data.error.error_description}`
