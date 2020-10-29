@@ -1,16 +1,24 @@
 <template>
   <div class="ring-chart">
-    <b-button id="keys-popover-target" ref="keys-title" variant="custom-split-outline">
+    <b-button
+      id="keys-popover-target"
+      ref="keys-title"
+      variant="custom-split-outline"
+    >
       <b-icon-info-square-fill font-scale="0.75"></b-icon-info-square-fill>
       Keys
     </b-button>
-    <b-popover target="keys-popover-target" triggers="hover focus" placement="bottom">
+    <b-popover
+      target="keys-popover-target"
+      triggers="hover focus"
+      placement="bottom"
+    >
       {{ keyDescription }}
     </b-popover>
     <ZingchartVue
       v-if="isElMounted"
       :data="pieConfig(timeRange)"
-      :height="pieOffsetHeight"
+      :height="offsetHeight('pie')"
     />
   </div>
 </template>
@@ -35,18 +43,17 @@ export default {
     ZingchartVue
   },
   computed: {
-    ...mapGetters("chartconfigs", [
-      "pieConfig",
-      "chartScale",
-      "pieOffsetHeight"
-    ])
+    ...mapGetters("chartconfigs", ["pieConfig", "offsetHeight"])
   },
   methods: {
-    ...mapMutations("chartconfigs", ["setPieTitleHeight"])
+    ...mapMutations("chartconfigs", ["setTitleHeight"])
   },
   mounted() {
     this.isElMounted = true;
-    this.setPieTitleHeight(this.$refs["keys-title"].offsetHeight);
+    this.setTitleHeight({
+      type: "pie",
+      height: this.$refs["keys-title"].offsetHeight
+    });
   }
 };
 </script>
