@@ -14,9 +14,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    topTypes: ["artists", "tracks"]
+    topTypes: ["artists", "tracks"],
+    windowWidth: window.innerWidth
   },
-  mutations: {},
+  mutations: {
+    setWindowWidth(state) {
+      state.windowWidth = window.innerWidth;
+    }
+  },
   actions: {},
   modules: {
     profile,
