@@ -9,7 +9,7 @@
       >{{ timeRange.text }}
     </b-button>
   </div>
-  <b-dropdown v-else variant="custom-dropdown" right :text="selected">
+  <b-dropdown v-else variant="custom-split" right :text="selected">
     <b-dropdown-item
       v-for="(timeRange, index) in timeRanges"
       :key="index"
