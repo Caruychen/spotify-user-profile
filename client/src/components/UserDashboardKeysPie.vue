@@ -1,30 +1,52 @@
 <template>
-  <b-spinner v-if="loading" label="Spinning"></b-spinner>
-  <ZingchartVue
-    class="ring-chart"
-    v-else
-    :data="pieConfig('Keys',timeRange)"
-  />
+  <div class="ring-chart">
+    <b-button id="keys-popover-target" ref="keys-title" variant="custom-split-outline">
+      <b-icon-info-square-fill font-scale="0.75"></b-icon-info-square-fill>
+      Keys
+    </b-button>
+    <b-popover target="keys-popover-target" triggers="hover focus" placement="bottom">
+      {{ keyDescription }}
+    </b-popover>
+    <ZingchartVue
+      v-if="isElMounted"
+      :data="pieConfig(timeRange)"
+      :height="pieOffsetHeight"
+    />
+  </div>
 </template>
 
 <script>
 import "zingchart/es6";
 import ZingchartVue from "zingchart-vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
+  data() {
+    return {
+      isElMounted: false,
+      keyDescription:
+        "The key the track is in. Based on standard Pitch Class Notation, e.g. C, C♯/D♭, D and so on."
+    };
+  },
   props: {
-    timeRange: String,
-    loading: Boolean
+    timeRange: String
   },
   components: {
     ZingchartVue
   },
   computed: {
-    ...mapGetters({
-      valueCount: "features/valueCount",
-      pieConfig: "chartconfigs/pieConfig"
-    })
+    ...mapGetters("chartconfigs", [
+      "pieConfig",
+      "chartScale",
+      "pieOffsetHeight"
+    ])
+  },
+  methods: {
+    ...mapMutations("chartconfigs", ["setPieTitleHeight"])
+  },
+  mounted() {
+    this.isElMounted = true;
+    this.setPieTitleHeight(this.$refs["keys-title"].offsetHeight);
   }
 };
 </script>

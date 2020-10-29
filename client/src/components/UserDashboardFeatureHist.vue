@@ -1,23 +1,33 @@
 <template>
-  <b-spinner v-if="loading" label="Spinning"></b-spinner>
-  <div v-else class="feature-histogram">
+  <div class="feature-histogram">
     <b-dropdown
-      variant="custom-dropdown"
       down
-      :text="('Audio feature: ' + selected) | capitalize(2)"
+      split
+      split-variant="custom-split-outline"
+      variant="custom-split"
+      ref="popover"
     >
+      <template #button-content>
+        <b-icon-info-square-fill font-scale="0.75"></b-icon-info-square-fill>
+        {{ selected.name | capitalize }}
+      </template>
       <b-dropdown-item
         v-for="feature in featureList"
-        :key="feature"
+        :key="feature.name"
         @click="chooseFeature(feature)"
       >
-        {{ feature }}
+        {{ feature.name }}
       </b-dropdown-item>
     </b-dropdown>
-    <ZingchartVue
-      :data="featureData"
-      :series="featureSeries(timeRange, bins, selected)"
-    />
+    <b-popover
+      v-if="isElMounted"
+      :target="popoverTarget"
+      triggers="hover focus"
+      placement="bottom"
+    >
+      {{ selected.description }}
+    </b-popover>
+    <ZingchartVue :data="histConfig(timeRange, bins, selected.name)" />
   </div>
 </template>
 
@@ -29,25 +39,13 @@ import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      myData: {
-        type: "bar",
-        backgroundColor: "transparent",
-        plot: {
-          aspect: "histogram"
-        },
-        "scale-y": {
-          label: {
-            text: "Frequency"
-          }
-        }
-      },
-      selected: "acousticness",
-      bins: 20
+      selected: null,
+      bins: 20,
+      isElMounted: false
     };
   },
   props: {
-    timeRange: String,
-    loading: Boolean
+    timeRange: String
   },
   components: {
     ZingchartVue
@@ -56,32 +54,23 @@ export default {
     ...mapState("features", {
       featureList: state => state.featureList
     }),
-    ...mapGetters("features", {
-      featureSeries: "featureDist"
+    ...mapGetters({
+      histConfig: "chartconfigs/histConfig"
     }),
-    featureData: function() {
-      return {
-        ...this.myData,
-        "scale-x": {
-          label: {
-            text: "Values"
-          },
-          labels: this.constructValueArray()
-        }
-      };
+    popoverTarget: function() {
+      return this.$refs.popover.$el.children[0];
     }
   },
   methods: {
     chooseFeature(feature) {
       this.selected = feature;
-    },
-    constructValueArray() {
-      let labelsArray = [];
-      for (let i = 0; i < this.bins; i++) {
-        labelsArray.push(i / this.bins);
-      }
-      return labelsArray;
     }
+  },
+  created() {
+    this.chooseFeature(this.featureList[0]);
+  },
+  mounted() {
+    this.isElMounted = true;
   }
 };
 </script>
