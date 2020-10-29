@@ -1,4 +1,4 @@
-import { splitColors } from "@/store/helpers/helpers.js";
+import { colorInterval, colorArray } from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -6,63 +6,143 @@ export default {
     pieData: {
       type: "ring",
       backgroundColor: "none",
-      height: "100%",
       width: "100%",
-      plot: {
-        valueBox: {
-          text: "%t\n%npv%",
-          fontSize: "12px",
-          decimals: 0,
-          placement: "out",
-          rules: [
-            {
-              rule: "%v <= 0",
-              text: ""
-            }
-          ]
-        },
-        slice: 80,
-        borderWidth: "0px",
-        animation: {
-          effect: "ANIMATION_EXPAND_VERTICAL",
-          method: "ANIMATION_REGULAR_EASE_OUT",
-          sequence: "ANIMATION_BY_PLOT",
-          speed: 50
-        }
-      },
       scaleR: {
         refAngle: 270
       }
     },
-    chartColors: ["#6771E3", "#DD50A3","#DDD150","#50DD8A"]
+    histogramData: {
+      type: "bar",
+      backgroundColor: "none",
+      plot: {
+        aspect: "histogram"
+      },
+      plotarea: {
+        margin: "dynamic"
+      },
+      "scale-y": {
+        label: {
+          text: "Frequency"
+        },
+        guide: {
+          alpha: 0.2
+        }
+      },
+      tooltip: {
+        text: "%v track(s)\n%k"
+      }
+    },
+    pieColorRange: ["#6771E3", "#DD50A3", "#DDD150", "#50DD8A"],
+    histogramColorRange: ["#6771E3", "#DD50A3"],
+    pieTitleHeight: 0,
+    pieDefaultHeight: 480
   },
   getters: {
-    pieConfig: (state, getters, rootState, rootGetters) => (title, timeRange) => {
-      const seriesData = rootGetters["features/valueCount"]("key", timeRange).map((item, index, array) => {
-        const colorInterval = splitColors(state.chartColors, index, array.length)
-        return { ...item, backgroundColor: colorInterval }
+    chartScale: (state, getters, rootState) => {
+      if (rootState.windowWidth < 380) {
+        return 0.6;
+      } else if (rootState.windowWidth < 800) {
+        return 0.7;
+      }
+      return 1;
+    },
+    pieOffsetHeight: (state, getters) => {
+      return state.pieDefaultHeight * getters.chartScale - state.pieTitleHeight;
+    },
+    pieConfig: (state, getters, rootState, rootGetters) => timeRange => {
+      const seriesData = rootGetters["features/valueCount"](
+        "key",
+        timeRange
+      ).map((item, index, array) => {
+        const color = colorInterval(state.pieColorRange, index, array.length);
+        return { ...item, backgroundColor: color };
       });
+      const fontScale =
+        getters.chartScale === 1
+          ? getters.chartScale
+          : getters.chartScale * 1.25;
+      const valueBoxFontBase = 12;
+      const sliceBase = 80;
+      const tooltipFontBase = 16;
+      const tooltipYOffsetBase = getters.pieOffsetHeight / 2;
       return {
-        layout: "horizontal",
-        height: "80%",
         graphset: [
           {
             ...state.pieData,
-            series: seriesData,
+            plot: {
+              valueBox: {
+                text: "%t\n%npv%",
+                fontSize: valueBoxFontBase * fontScale,
+                decimals: 0,
+                placement: "out",
+                rules: [
+                  {
+                    rule: "%v <= 0",
+                    text: ""
+                  }
+                ]
+              },
+              slice: sliceBase * getters.chartScale,
+              borderWidth: "0px",
+              animation: {
+                effect: "ANIMATION_EXPAND_VERTICAL",
+                method: "ANIMATION_REGULAR_EASE_OUT",
+                sequence: "ANIMATION_BY_PLOT",
+                speed: 50
+              }
+            },
+            plotarea: {
+              margin: "dynamic"
+            },
             tooltip: {
               text:
                 '<span style="color:%color">%t:</span><br><span style="color:%color">%v tracks</span>',
-              fontSize: "16",
+              fontSize: tooltipFontBase * fontScale,
               backgroundColor: "none",
               borderColor: "none",
               anchor: "c",
               x: "50%",
-              y: "53%",
+              y: tooltipYOffsetBase,
               sticky: true
+            },
+            series: seriesData
+          }
+        ]
+      };
+    },
+    histConfig: (state, getters, rootState, rootGetters) => (
+      timeRange,
+      bins,
+      feature
+    ) => {
+      if (!bins || bins <= 0) bins = 1;
+      const values = [];
+      for (let i = 0; i < bins; i++) {
+        values.push(i / bins);
+      }
+      return {
+        graphset: [
+          {
+            ...state.histogramData,
+            plot: {
+              styles: colorArray(state.histogramColorRange, bins)
+            },
+            series: rootGetters["features/featureDist"](
+              timeRange,
+              bins,
+              feature
+            ),
+            scaleX: {
+              values
             }
           }
         ]
       };
+    }
+  },
+  mutations: {
+    setPieTitleHeight(state, height) {
+      state.pieTitleHeight = height;
     }
   }
 };
