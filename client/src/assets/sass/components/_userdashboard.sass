@@ -1,28 +1,49 @@
 #dashboard
     hr
         border-bottom: 1px solid $stark
-        margin-bottom: 0
+        margin-bottom: 2rem
 
     .dashboard-container
         display: flex
-        flex-wrap: wrap
-        justify-content: center
-        align-items: center
+        flex-direction: column
+        justify-content: flex-start
+        align-items: stretch
+        
         .grid-container
-            flex: 1 1 50%
             display: grid
-            grid-template-columns: auto auto
-            grid-row-gap: 2rem
-
-            .grid-item
-                text-align: left
+            grid-row-gap: 1rem
+            grid-template-rows: auto auto
             h3
-                font-size: 1.25rem
-            p
+                font-size: 1.5rem
+                font-weight: 400
+            .item-header-1
+                grid-column: 1
+                grid-row: 1
+            .item-main
+                b
+                    font-size: 2rem
+                    color: $soft-green
+                p
+                    opacity: 0.7
+                    filter: alpha(opacity=70)
+        
+        .btn-custom-split-outline
+            display: flex
+            align-items: center
+            justify-content: space-between
+            margin: auto
 
-        .ring-chart
-            flex: 1 1 50%
-            // width: 300px
+            svg
+                margin-right: 10px
+                height: 100%
 
-        .feature-histogram
-            flex-basis: 100%
+@include media-breakpoint-up(md)
+    #dashboard
+        .dashboard-container
+            flex-flow: row wrap
+
+            .grid-container, .ring-chart
+                flex: 1 1 50%
+
+            .feature-histogram
+                flex: 1 1 100%

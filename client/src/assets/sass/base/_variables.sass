@@ -75,6 +75,27 @@ $spotify-green: #1DB954
 .btn-custom-dropdown:hover, .btn-custom-dropdown:active
     color: $stark
 
+.btn-custom-split-outline
+    @extend .btn
+    font-weight: 500
+    color: $soft-blue-green
+    border: 1px solid $soft-blue-green
+
+.btn-custom-split-outline:hover, .btn-custom-split-outline:active
+    color: $stark
+    background-color: $soft-blue-green
+
+.btn-custom-split
+    @extend .btn
+    color: $stark
+    background-color: $soft-blue-green
+
+.btn-custom-split:hover, .btn-custom-split:active
+    color: $stark
+    opacity: 0.9
+    filter: alpha(opacity=90)
+    
 // Cards
 .card
-    background-color: $void-lighter
+    background-color: rgba(115, 96, 194, 0.2)
+    
