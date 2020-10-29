@@ -5,7 +5,7 @@
       split
       split-variant="custom-split-outline"
       variant="custom-split"
-      ref="popover"
+      ref="histogram-title"
     >
       <template #button-content>
         <b-icon-info-square-fill font-scale="0.75"></b-icon-info-square-fill>
@@ -27,14 +27,18 @@
     >
       {{ selected.description }}
     </b-popover>
-    <ZingchartVue :data="histConfig(timeRange, bins, selected.name)" />
+    <ZingchartVue
+      v-if="isElMounted"
+      :data="histConfig(timeRange, bins, selected.name)"
+      :height="offsetHeight('histogram')"
+    />
   </div>
 </template>
 
 <script>
 import "zingchart/es6";
 import ZingchartVue from "zingchart-vue";
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -54,14 +58,13 @@ export default {
     ...mapState("features", {
       featureList: state => state.featureList
     }),
-    ...mapGetters({
-      histConfig: "chartconfigs/histConfig"
-    }),
+    ...mapGetters("chartconfigs", ["histConfig", "offsetHeight"]),
     popoverTarget: function() {
-      return this.$refs.popover.$el.children[0];
+      return this.$refs["histogram-title"].$el.children[0];
     }
   },
   methods: {
+    ...mapMutations("chartconfigs", ["setTitleHeight"]),
     chooseFeature(feature) {
       this.selected = feature;
     }
@@ -71,6 +74,10 @@ export default {
   },
   mounted() {
     this.isElMounted = true;
+    this.setTitleHeight({
+      type: "histogram",
+      height: this.$refs["histogram-title"].$el.offsetHeight
+    });
   }
 };
 </script>
