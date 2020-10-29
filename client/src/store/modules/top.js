@@ -31,11 +31,13 @@ export default {
           return item.popularity;
         })
         .reduce((acc, cur) => acc + cur);
-      const average = Math.round(popularityNumerator / state[type][timeRange].items.length);
+      const average = Math.round(
+        popularityNumerator / state[type][timeRange].items.length
+      );
       return {
         average,
         total: state[type][timeRange].items.length
-      }
+      };
     }
   },
   mutations: {
