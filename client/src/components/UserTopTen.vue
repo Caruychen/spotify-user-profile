@@ -1,7 +1,7 @@
 <template>
   <b-col md="6" class="top-ten-container">
     <b-container class="top-ten-heading">
-      <b-row align-v="center">
+      <b-row align-v="center" no-gutters>
         <b-col
           ><h3>Top 10 {{ type | capitalize }}</h3></b-col
         >
@@ -10,7 +10,9 @@
         /></b-col>
       </b-row>
     </b-container>
-    <b-spinner v-if="loading" label="Spinning"></b-spinner>
+    <div v-if="loading" class="loading-container">
+      <b-spinner label="Spinning"></b-spinner>
+    </div>
     <ul v-else>
       <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
         <BaseListCard

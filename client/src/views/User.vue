@@ -1,5 +1,7 @@
 <template>
-  <b-spinner v-if="loading" label="Spinning"></b-spinner>
+  <div v-if="loading" class="loading-container">
+    <b-spinner label="Spinning"></b-spinner>
+  </div>
   <div v-else id="user">
     <b-img
       :src="user.images[0].url"
