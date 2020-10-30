@@ -44,6 +44,16 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
+        path: "/tracks",
+        name: "TrackDetails",
+        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "trackdetails" */ "../views/TrackDetails.vue"
+          ),
+        meta: { requiresAuth: true }
+      },
+      {
         path: "",
         redirect: "/user"
       }
