@@ -1,12 +1,15 @@
 <template>
   <b-card no-body class="overflow-hidden list-item-container">
     <b-row no-gutters>
-      <b-col cols="auto">
-        <b-card-img
-          class="image-column rounded-0"
-          :src="item.image[item.image.length - 1].url"
-          :alt="item.name"
-        ></b-card-img>
+      <b-col cols="auto" class="detail-link">
+        <router-link to="/tracks">
+          <b-card-img
+            class="image-column rounded-0"
+            :src="item.image[item.image.length - 1].url"
+            :alt="item.name"
+          ></b-card-img>
+          <b-icon-info-square-fill></b-icon-info-square-fill>
+        </router-link>
       </b-col>
       <b-col>
         <b-card-body>

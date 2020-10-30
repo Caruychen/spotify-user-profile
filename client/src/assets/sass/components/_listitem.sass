@@ -7,10 +7,31 @@
         justify-content: center
         max-height: 65px
 
-    img
-        width: 65px
-        height: 65px
-        object-fit: cover
+    .detail-link
+        a
+            opacity: 1
+            filter: alpha(opacity=100)
+            display: flex
+            justify-content: center
+            align-items: center
+
+            img
+                width: 65px
+                height: 65px
+                object-fit: cover
+            svg
+                position: absolute
+                opacity: 0
+                filter: alpha(opacity=0)
+                transition: 0.3s
+
+        a:hover > img
+            opacity: 0.5
+            filter: alpha(opacity=60)
+
+        a:hover > svg
+            opacity: 1
+            filter: alpha(opacity=100)
 
     .card-body
         padding: 0 20px
