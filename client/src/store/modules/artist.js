@@ -59,7 +59,7 @@ export default {
       if (!state.artist || state.artist.id != id) {
         const artist = getters.getArtistFromTopState(id);
         artistCall = artist
-          ? (commit("setArtist", artist), Promise.resolve(true))
+          ? commit("setArtist", artist)
           : dispatch("fetchArtist", id);
       }
       const albumCall = dispatch("fetchAlbums", id);
