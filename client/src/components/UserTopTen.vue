@@ -15,11 +15,7 @@
     </div>
     <ul v-else>
       <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
-        <BaseListCard
-          :item="item"
-          :isTrack="type === 'tracks'"
-          :isSubColumn="true"
-        />
+        <BaseListCard :item="item" />
       </li>
     </ul>
   </b-col>
