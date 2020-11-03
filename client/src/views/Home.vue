@@ -8,10 +8,20 @@
 <script>
 // @ is an alias to /src
 import TheNavigation from "@/components/TheNavigation.vue";
+import { mapMutations } from "vuex";
+
 export default {
   name: "Home",
   components: {
     TheNavigation
+  },
+  methods: {
+    ...mapMutations({
+      setWindowWidth: "setWindowWidth"
+    })
+  },
+  created() {
+    window.addEventListener("resize", this.setWindowWidth);
   }
 };
 </script>
