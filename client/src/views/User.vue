@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import UserTopTen from "@/components/UserTopTen.vue";
 import UserPlayer from "@/components/UserPlayer.vue";
 import UserDashboard from "@/components/UserDashboard.vue";
@@ -72,13 +72,9 @@ export default {
       fetchUserProfile: "profile/fetchUserProfile",
       fetchPlaylists: "playlists/fetchPlaylists",
       fetchFollowing: "follow/fetchFollowing"
-    }),
-    ...mapMutations({
-      setWindowWidth: "setWindowWidth"
     })
   },
   created() {
-    window.addEventListener("resize", this.setWindowWidth);
     this.loading = true;
     (async () => {
       try {
