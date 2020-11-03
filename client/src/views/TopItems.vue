@@ -1,9 +1,7 @@
 <template>
   <div id="top-items">
     <b-jumbotron id="top-views-header">
-      <template v-slot:header
-        >Top {{ $route.params.slug | capitalize }}</template
-      >
+      <template v-slot:header>Top {{ slug | capitalize }}</template>
       <BaseTimeRangeSelector
         version="button"
         @updateTimeRange="onTimeRangeUpdate"
@@ -15,14 +13,23 @@
     </div>
     <div v-else class="top-items-container">
       <div
-        v-for="(item, index) in allTopItems($route.params.slug, timeRange)"
+        v-for="(item, index) in allTopItems(slug, timeRange)"
         :key="index"
         class="top-item"
       >
-        <b-card :img-src="item.image[0].url" :alt="item.name">
-          <b-card-text>
-            {{ index + 1 }}
-          </b-card-text>
+        <b-card overlay :img-src="item.image[0].url" :alt="item.name">
+          <router-link
+            :to="{
+              name: item.type,
+              params: {
+                id: item.id
+              }
+            }"
+          >
+            <b-card-text>
+              {{ index + 1 }}
+            </b-card-text>
+          </router-link>
         </b-card>
         <b-link :href="item.external_url" target="_blank">
           {{ item.name }}
@@ -61,7 +68,7 @@ export default {
     timeRange: function() {
       this.loadTopItems();
     },
-    $route: function() {
+    slug: function() {
       this.loadTopItems();
     }
   },
@@ -72,7 +79,7 @@ export default {
     loadTopItems: async function() {
       this.loading = true;
       const params = {
-        type: this.$route.params.slug,
+        type: this.slug,
         timeRange: this.timeRange
       };
       await this.fetchTopItems(params);
