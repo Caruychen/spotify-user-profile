@@ -3,7 +3,9 @@ function filterArtist(item) {
   return {
     name: item.name,
     external_url: item.external_urls.spotify,
-    image: images.length > 0 ? images : require("@/assets/logos/person.svg")
+    image: images.length > 0 ? images : require("@/assets/logos/person.svg"),
+    type: item.type,
+    id: item.id
   };
 }
 
@@ -18,7 +20,9 @@ function filterTrack(item) {
       name: item.album.name,
       spotifyUrl: item.album.external_urls.spotify
     },
-    duration: item.duration_ms
+    duration: item.duration_ms,
+    type: item.type,
+    id: item.id
   };
 }
 
@@ -33,6 +37,17 @@ function filterEpisode(item) {
         : require("@/assets/logos/person.svg"),
     duration: item.duration_ms
   };
+}
+
+function filterAlbum(item) {
+  const images = item.images;
+  return {
+    name: item.name,
+    external_url: item.external_urls.spotify,
+    image: images.length > 0 ? images : require("@/assets/logos/person.svg"),
+    type: item.type,
+    id: item.id
+  }
 }
 
 function colorInterval(colorRange, index, arrayLength) {
@@ -66,4 +81,4 @@ function colorArray(colorRange, arrayLength) {
   return array;
 }
 
-export { filterArtist, filterTrack, filterEpisode, colorInterval, colorArray };
+export { filterArtist, filterTrack, filterEpisode, filterAlbum, colorInterval, colorArray };
