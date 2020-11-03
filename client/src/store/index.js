@@ -9,12 +9,12 @@ import recent from "./modules/recent.js";
 import player from "./modules/player.js";
 import features from "./modules/features.js";
 import chartconfigs from "./modules/chartconfigs.js";
+import artist from "./modules/artist.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    topTypes: ["artists", "tracks"],
     windowWidth: window.innerWidth
   },
   mutations: {
@@ -32,6 +32,7 @@ export default new Vuex.Store({
     recent,
     player,
     features,
-    chartconfigs
+    chartconfigs,
+    artist
   }
 });
