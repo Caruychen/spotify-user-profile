@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="loading" class="loading-container">
+    <b-spinner label="Spinning"></b-spinner>
+  </div>
+  <div v-else id="track">
     <h1>Track detail</h1>
   </div>
 </template>

@@ -10,6 +10,7 @@ import player from "./modules/player.js";
 import features from "./modules/features.js";
 import chartconfigs from "./modules/chartconfigs.js";
 import artist from "./modules/artist.js";
+import track from "./modules/track.js";
 
 Vue.use(Vuex);
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     player,
     features,
     chartconfigs,
-    artist
+    artist,
+    track
   }
 });
