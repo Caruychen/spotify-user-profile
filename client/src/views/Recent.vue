@@ -9,7 +9,7 @@
     </div>
     <ul v-else>
       <li v-for="(item, index) in recentList" :key="index">
-        <BaseListCard :item="item" :isTrack="true" />
+        <BaseListCard :item="item" />
       </li>
     </ul>
   </div>
