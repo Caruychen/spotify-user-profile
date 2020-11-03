@@ -45,12 +45,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState({
-      topViews: state => state.topTypes
-    })
+  data() {
+    return {
+      topViews: ["artists", "tracks"]
+    };
   },
   methods: {
     logOut() {
