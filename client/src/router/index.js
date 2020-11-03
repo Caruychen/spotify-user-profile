@@ -44,12 +44,20 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
-        path: "/tracks",
-        name: "TrackDetails",
+        path: "/artist/:id",
+        name: "artist",
+        props: true,
+        component: () =>
+          import(/* webpackChunkName: "detailartist" */ "../views/Artist.vue"),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/track/:id",
+        name: "track",
         props: true,
         component: () =>
           import(
-            /* webpackChunkName: "trackdetails" */ "../views/TrackDetails.vue"
+            /* webpackChunkName: "detailtrack" */ "../views/DetailTrack.vue"
           ),
         meta: { requiresAuth: true }
       },
