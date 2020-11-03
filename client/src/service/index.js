@@ -1,5 +1,4 @@
 import axios from "axios";
-import router from "@/router";
 import store from "@/store";
 
 const backendHTTP = axios.create({ baseURL: "http://localhost:8081/" });
@@ -15,12 +14,7 @@ spotifyHTTP.interceptors.response.use(
   async error => {
     const status = error.response ? error.response.status : null;
     const originalConfig = error.config;
-    // Return to login if Bad Request
-    if (status === 400) {
-      router.push({
-        name: "Login"
-      });
-    }
+
     // Uses refresh token when access code is unauthorized
     if (status === 401) {
       const refreshStatus = await store.dispatch("auth/tokenRefresh");
