@@ -2,7 +2,14 @@
   <b-card no-body class="overflow-hidden list-item-container">
     <b-row no-gutters>
       <b-col cols="auto" class="detail-link">
-        <router-link to="/tracks">
+        <router-link
+          :to="{
+            name: item.type,
+            params: {
+              id: item.id
+            }
+          }"
+        >
           <b-card-img
             class="image-column rounded-0"
             :src="item.image[item.image.length - 1].url"
@@ -63,9 +70,12 @@ export default {
     };
   },
   props: {
-    item: Object,
-    isTrack: Boolean,
-    isSubColumn: Boolean
+    item: Object
+  },
+  computed: {
+    isTrack: function() {
+      return this.item.type === "track";
+    }
   },
   methods: {
     mouseTrigger: function(element) {
