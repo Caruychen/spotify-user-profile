@@ -57,7 +57,7 @@ const routes = [
         props: true,
         component: () =>
           import(
-            /* webpackChunkName: "detailtrack" */ "../views/DetailTrack.vue"
+            /* webpackChunkName: "detailtrack" */ "../views/Track.vue"
           ),
         meta: { requiresAuth: true }
       },
