@@ -51,23 +51,25 @@
                 .card-body
                     padding: 0
                     width: 100%
-                    text-align: center
+                    a
+                        padding: 0
+                        height: 100%
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        text-decoration: none
 
-                    p
-                        position: absolute
-                        top: 50%
-                        left: 50%
-                        transform: translate(-50%, -50%)
-                        opacity: 0
-                        filter: alpha(opacity=0)
-                        transition: 0.3s
-                        font-size: 2rem
-                        font-weight: 500
+                        p
+                            opacity: 0
+                            filter: alpha(opacity=0)
+                            transition: 0.3s
+                            font-size: 2rem
+                            font-weight: 500
 
             .card:hover > .card-img
                 opacity: 0.4
                 filter: alpha(opacity=40)
-            .card:hover > .card-body p 
+            .card:hover > .card-body a p 
                 opacity: 1
                 filter: alpha(opacity=100)
 
