@@ -1,4 +1,4 @@
-import { colorInterval, colorArray } from "@/store/helpers/helpers.js";
+import { colorInterval, colorArray, capitalize } from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -7,6 +7,9 @@ export default {
       type: "ring",
       backgroundColor: "none",
       width: "100%",
+      plotarea: {
+        margin: "dynamic"
+      },
       scaleR: {
         refAngle: 270
       }
@@ -16,6 +19,17 @@ export default {
       backgroundColor: "none",
       tooltip: {
         text: "%v track(s)\n%k"
+      }
+    },
+    radarData: {
+      type: "radar",
+      backgroundColor: "none",
+      plot: {
+        aspect: "area"
+      },
+      tooltip: {
+        decimals: 2,
+        text: "%k: %v"
       }
     },
     pieColorRange: ["#6771E3", "#DD50A3", "#DDD150", "#50DD8A"],
@@ -80,9 +94,6 @@ export default {
                 sequence: "ANIMATION_BY_PLOT",
                 speed: 50
               }
-            },
-            plotarea: {
-              margin: "dynamic"
             },
             tooltip: {
               text:
@@ -161,6 +172,62 @@ export default {
               bins,
               feature
             )
+          }
+        ]
+      };
+    },
+    radarConfig: (state, getters, rootState, rootGetters) => {
+      const fontBase = 12;
+      return {
+        graphset: [
+          {
+            ...state.radarData,
+            scaleK: {
+              values: rootState.features["featureList"].map(_ => capitalize(_.name)),
+              item: {
+                fontColor: "#E7DFDD",
+                fontSize: fontBase * getters.fontScale,
+                borderColor: "#9c9795",
+                backgroundColor: "#302d3b",
+                borderWidth: 1,
+                padding: "5 10",
+                borderRadius: 10
+              },
+              tick: {
+                lineColor: "#9c9795",
+                lineStyle: "dotted",
+                lineWidth: 2,
+                size: 15
+              },
+              guide: {
+                lineColor: "#9c9795",
+                lineWidth: 1,
+                lineStyle: "solid",
+                backgroundColor: "transparent"
+              }
+            },
+            scaleV: {
+              values: "0:1:0.25",
+              item: {
+                visible: true,
+                fontSize: fontBase * getters.fontScale
+              },
+              guide: {
+                lineColor: "#4a465c",
+                lineStyle: "solid",
+                backgroundColor: "transparent"
+              }
+            },
+            series: [{
+              values: rootGetters["track/getFeatureValues"],
+              lineColor: "#6771E3",
+              backgroundColor: "#6771E3",
+              marker: {
+                backgroundColor: "#6771E3",
+                borderColor: "#E7DFDD",
+                size: 3
+              }
+            }],
           }
         ]
       };

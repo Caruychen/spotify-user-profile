@@ -47,7 +47,7 @@ function filterAlbum(item) {
     image: images.length > 0 ? images : require("@/assets/logos/person.svg"),
     type: item.type,
     id: item.id
-  }
+  };
 }
 
 function colorInterval(colorRange, index, arrayLength) {
@@ -81,4 +81,25 @@ function colorArray(colorRange, arrayLength) {
   return array;
 }
 
-export { filterArtist, filterTrack, filterEpisode, filterAlbum, colorInterval, colorArray };
+function capitalize(text, index) {
+  if (!text) return "";
+  text = text.toString().split(" ");
+  if (!index || index >= text.length || index < 0) {
+    index = 0;
+  }
+  text.splice(
+    index,
+    1,
+    text[index].charAt(0).toUpperCase() + text[index].slice(1)
+  );
+  return text.join(" ");
+}
+export {
+  filterArtist,
+  filterTrack,
+  filterEpisode,
+  filterAlbum,
+  colorInterval,
+  colorArray,
+  capitalize
+};
