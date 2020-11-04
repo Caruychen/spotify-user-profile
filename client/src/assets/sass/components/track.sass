@@ -40,7 +40,29 @@
                 b
                     color: $soft-green
     .track-content
-        padding: 2rem 1.5rem
+        padding: 2rem 1.5rem 10rem
+
+        h2
+            font-weight: 300
+            padding-bottom: 0.5rem
+            border-bottom: 1px solid $stark
+            margin: 0
+
+        .features-grid div
+            border: 1px solid $void-lighter
+            padding: 1rem
+
+        .feature-item-value
+            color: $soft-green
+            font-size: 2rem
+            font-weight: 400
+            margin: 0
+
+        .feature-item-name
+            font-size: 0.9rem
+            opacity: 0.8
+            filter: alpha(opacity=80)
+            margin: 0
 
 @include media-breakpoint-up(md)
     #track
@@ -56,3 +78,5 @@
                 mask-image: none
                 height: 200px
                 width: 200px
+        .track-content
+            padding: 2rem 0
