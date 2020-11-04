@@ -1,6 +1,10 @@
 import { spotifyHTTP } from "@/service/index.js";
 import querystring from "query-string";
-import { filterArtist, filterTrack, filterAlbum } from "@/store/helpers/helpers.js";
+import {
+  filterArtist,
+  filterTrack,
+  filterAlbum
+} from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -39,10 +43,9 @@ export default {
         .slice(0, listRange);
     },
     albums: state => {
-      return state.albums.items
-        .map(album => {
-          return filterAlbum(album);
-        })
+      return state.albums.items.map(album => {
+        return filterAlbum(album);
+      });
     }
   },
   mutations: {
@@ -105,11 +108,11 @@ export default {
       try {
         const topTracks = await spotifyHTTP.get(
           "artists/" +
-          id +
-          "/top-tracks?" +
-          querystring.stringify({
-            country: "from_token"
-          })
+            id +
+            "/top-tracks?" +
+            querystring.stringify({
+              country: "from_token"
+            })
         );
         if (topTracks.status === 200) {
           commit("setArtistSubData", {
