@@ -10,26 +10,9 @@
             :src="artist.images[0].url"
             :alt="artist.name"
           ></b-card-img>
-          <b-card-body v-if="!mdScreenPlus" overlay>
-            <div class="back-button" @click="goBack()">
-              <b-icon-chevron-left></b-icon-chevron-left>
-            </div>
-            <b-card-title title-tag="h1">
-              {{ artist.name }}
-            </b-card-title>
-            <b-card-text>
-              <b class="artist-statistic">{{
-                artist.followers.total.toLocaleString()
-              }}</b>
-              followers
-              <br />
-              <b class="artist-statistic">{{ artist.popularity }}%</b>
-              popularity
-            </b-card-text>
-          </b-card-body>
         </b-col>
-        <b-col v-if="mdScreenPlus">
-          <b-card-body>
+        <b-col cols="*">
+          <b-card-body :overlay="!mdScreenPlus">
             <div class="back-button" @click="goBack()">
               <b-icon-chevron-left></b-icon-chevron-left>
             </div>
