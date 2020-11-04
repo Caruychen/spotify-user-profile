@@ -3,7 +3,21 @@
     <b-card no-body>
       <b-row no-gutters>
         <b-col md="3">
-          <b-card-img :src="nowPlaying.item.image[0].url"></b-card-img>
+          <router-link
+            :to="{
+              name: nowPlaying.item.type,
+              params: {
+                id: nowPlaying.item.id
+              }
+            }"
+            class="track-link"
+          >
+            <b-card-img
+              :src="nowPlaying.item.image[0].url"
+              :alt="nowPlaying.item.name"
+            ></b-card-img>
+            <b-icon-info-square-fill></b-icon-info-square-fill>
+          </router-link>
         </b-col>
         <b-col md="9">
           <b-card-body class="card-img-overlay">
