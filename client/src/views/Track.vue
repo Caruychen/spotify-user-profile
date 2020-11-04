@@ -60,8 +60,24 @@
       </b-row>
     </b-card>
     <b-container class="track-content">
-      <b-row>
-        <ZingchartVue :data="radarConfig" />
+      <b-row class="text-center">
+        <b-col>
+          <h2>Audio features</h2>
+          <ZingchartVue :data="radarConfig" />
+        </b-col>
+      </b-row>
+      <b-row class="text-center features-grid">
+        <b-col
+          v-for="(item, index) in getFeaturesGrid"
+          :key="index"
+          cols="6"
+          sm="2"
+        >
+          <p class="feature-item-value">
+            {{ item.value }}
+          </p>
+          <p class="feature-item-name">{{ item.name }}</p>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -89,7 +105,8 @@ export default {
   },
   computed: {
     ...mapState(["windowWidth"]),
-    ...mapState("track", ["track"]),
+    ...mapState("track", ["track", "trackFeatures"]),
+    ...mapGetters("track", ["getFeaturesGrid"]),
     ...mapGetters("chartconfigs", ["radarConfig"]),
     mdScreenPlus: function() {
       return this.windowWidth >= 768;
