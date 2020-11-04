@@ -50,7 +50,7 @@
     <b-container class="artist-content">
       <b-row>
         <b-col md="6">
-          <h2>Popular</h2>
+          <h2>Popular tracks</h2>
           <ul>
             <li
               v-for="(track, index) in topTracks(moreTracks.range)"
@@ -82,8 +82,11 @@
           >
         </b-col>
       </b-row>
-      <b-row>
-        <b-col class="albums-container">
+      <b-row class="text-center">
+        <b-col class="album-items-title">
+          <h2>Albums</h2>
+        </b-col>
+        <b-col cols="12" class="album-items-container">
           <div v-for="(item, index) in albums" :key="index" class="album-item">
             <b-card overlay :img-src="item.image[0].url" :alt="item.name">
               <!-- <router-link
