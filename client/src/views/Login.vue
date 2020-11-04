@@ -12,8 +12,7 @@ export default {
     buttonLink() {
       return process.env.NODE_ENV !== "production"
         ? "http://localhost:8081/login"
-        : "http://localhost:8081/login";
-      // : "https://spotify-profile.herokuapp.com/login";
+        : "https://audio-viber.herokuapp.com/login";
     }
   }
 };
