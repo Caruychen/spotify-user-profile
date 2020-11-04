@@ -56,7 +56,7 @@ export default {
   actions: {
     fetchCurrentPlayback: async ({ commit, state }) => {
       try {
-        // Add cancellable token
+        // allow cancellation of playback requests when seek request is made
         const playback = await spotifyHTTP.get("me/player", {
           cancelToken: state.source.token
         });
