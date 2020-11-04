@@ -1,4 +1,5 @@
 import { spotifyHTTP } from "@/service/index.js";
+import { msToMinutes } from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -57,6 +58,34 @@ export default {
         return state.trackFeatures[feature.name];
       });
       return values;
+    },
+    getFeaturesGrid: (state, getters, rootState) => {
+      return [
+        {
+          name: "Duration",
+          value: msToMinutes(state.trackFeatures.duration_ms)
+        },
+        {
+          name: "Key",
+          value: rootState.features["keyMap"][state.trackFeatures.key]
+        },
+        {
+          name: "Mode",
+          value: state.trackFeatures.mode === 0 ? "Minor" : "Major"
+        },
+        {
+          name: "Time signature",
+          value: state.trackFeatures.time_signature
+        },
+        {
+          name: "Tempo (BPM)",
+          value: state.trackFeatures.tempo.toFixed(2)
+        },
+        {
+          name: "Loudness (dB)",
+          value: state.trackFeatures.loudness.toFixed(2)
+        }
+      ];
     }
   },
   mutations: {
