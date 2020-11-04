@@ -139,8 +139,8 @@ export default {
     BaseListCard
   },
   computed: {
-    ...mapState("artist", ["artist"]),
     ...mapState(["windowWidth"]),
+    ...mapState("artist", ["artist"]),
     ...mapGetters("artist", ["topTracks", "relatedArtists", "albums"]),
     mdScreenPlus: function() {
       return this.windowWidth >= 768;
