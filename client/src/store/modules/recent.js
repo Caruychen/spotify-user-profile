@@ -4,19 +4,19 @@ import { filterTrack } from "@/store/helpers/helpers.js";
 export default {
   namespaced: true,
   state: {
-    items: []
+    tracks: []
   },
   getters: {
     getRecentList: state => {
-      return state.items.map(item => {
+      return state.tracks.map(item => {
         const track = item.track;
         return filterTrack(track);
       });
     }
   },
   mutations: {
-    setRecentItems(state, items) {
-      state.items = items;
+    setRecentItems(state, tracks) {
+      state.tracks = tracks;
     }
   },
   actions: {
