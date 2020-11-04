@@ -7,7 +7,7 @@
       <b-row no-gutters>
         <b-col md="auto">
           <b-card-img
-            :src="track.images[0].url"
+            :src="track.album.images[0].url"
             :alt="track.name"
           ></b-card-img>
           <b-card-body v-if="!mdScreenPlus" overlay>
@@ -18,10 +18,16 @@
               {{ track.name }}
             </b-card-title>
             <b-card-text>
-              <b class="track-statistic">{{
-                track.followers.total.toLocaleString()
-              }}</b>
-              followers
+              <span v-for="(artist, index) in track.artists" :key="index">
+                <a :href="artist.external_urls.spotify" target="_blank">{{
+                  artist.name
+                }}</a
+                >{{ artist.name | insertComma(index, track.artists.length) }}
+              </span>
+              <br />
+              <a :href="track.album.external_urls.spotify">{{
+                track.album.name
+              }}</a>
               <br />
               <b class="track-statistic">{{ track.popularity }}%</b>
               popularity
@@ -35,10 +41,16 @@
             </div>
             <b-card-title title-tag="h1">{{ track.name }}</b-card-title>
             <b-card-text>
-              <b class="track-statistic">{{
-                track.followers.total.toLocaleString()
-              }}</b>
-              followers
+              <span v-for="(artist, index) in track.artists" :key="index">
+                <a :href="artist.external_urls.spotify" target="_blank">{{
+                  artist.name
+                }}</a
+                >{{ artist.name | insertComma(index, track.artists.length) }}
+              </span>
+              <br />
+              <a :href="track.album.external_urls.spotify">{{
+                track.album.name
+              }}</a>
               <br />
               <b class="track-statistic">{{ track.popularity }}%</b>
               popularity
@@ -47,11 +59,18 @@
         </b-col>
       </b-row>
     </b-card>
+    <b-container class="track-content">
+      <b-row>
+        <ZingchartVue :data="radarConfig" />
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import "zingchart/es6";
+import ZingchartVue from "zingchart-vue";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -65,8 +84,16 @@ export default {
       required: true
     }
   },
+  components: {
+    ZingchartVue
+  },
   computed: {
-    ...mapState("track", ["track"])
+    ...mapState(["windowWidth"]),
+    ...mapState("track", ["track"]),
+    ...mapGetters("chartconfigs", ["radarConfig"]),
+    mdScreenPlus: function() {
+      return this.windowWidth >= 768;
+    }
   },
   methods: {
     ...mapActions("track", ["loadTrack"]),
