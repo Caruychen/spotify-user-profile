@@ -1,0 +1,58 @@
+#track
+    text-align: left
+    .track-header
+        background-color: transparent
+        border: none
+
+        .card-img
+            -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%,rgba(0,0,0,0))
+            object-fit: cover
+
+        .card-body
+            display: flex
+            flex-direction: column
+            justify-content: flex-end
+            align-items: flex-start
+            height: 100%
+
+            .back-button
+                position: absolute
+                top: 0
+                left: 0
+                width: 2rem
+                height: 2rem
+                margin: 1rem
+                color: $stark
+                display: flex
+                justify-content: flex-start
+                align-items: center
+
+            .back-button:hover::after
+                content: "Back"
+
+            .card-title
+                font-size: 2rem
+                padding: 0
+
+            .card-text
+                font-size: 0.9rem
+                b
+                    color: $soft-green
+    .track-content
+        padding: 2rem 1.5rem
+
+@include media-breakpoint-up(md)
+    #track
+        padding: 5rem
+
+        & > *
+            margin: 0 auto
+            max-width: 900px
+        .track-header
+            background-color: $void-lighter
+            .card-img
+                -webkit-mask-image: none
+                mask-image: none
+                height: 200px
+                width: 200px
