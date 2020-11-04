@@ -38,6 +38,12 @@
       </div>
       <KeysPie :timeRange="timeRange" />
       <FeatureHistogram :timeRange="timeRange" />
+      <b-container id="top-ten-lists">
+        <b-row>
+          <UserTopTen type="artists" :timeRange="timeRange" />
+          <UserTopTen type="tracks" :timeRange="timeRange" />
+        </b-row>
+      </b-container>
     </div>
   </div>
 </template>
@@ -47,6 +53,7 @@ import { mapGetters, mapActions } from "vuex";
 import BaseTimeRangeSelector from "@/components/BaseTimeRangeSelector.vue";
 import FeatureHistogram from "@/components/UserDashboardFeatureHist.vue";
 import KeysPie from "@/components/UserDashboardKeysPie.vue";
+import UserTopTen from "@/components/UserTopTen.vue";
 
 export default {
   data() {
@@ -60,7 +67,8 @@ export default {
   components: {
     BaseTimeRangeSelector,
     FeatureHistogram,
-    KeysPie
+    KeysPie,
+    UserTopTen
   },
   computed: {
     ...mapGetters("top", {
@@ -68,13 +76,8 @@ export default {
     })
   },
   watch: {
-    timeRange: async function() {
-      this.loading = true;
-      const artistUpdate = await this.loadTopItems("artists");
-      const trackUpdate = await this.loadTopItems("tracks");
-      await Promise.all([artistUpdate, trackUpdate]);
-      this.loading = false;
-      this.loadAudioFeatures();
+    timeRange: function() {
+      this.loadListeningData();
     }
   },
   methods: {
@@ -82,15 +85,18 @@ export default {
       fetchFeatures: "features/fetchAudioFeatures",
       fetchTopItems: "top/fetchTopItems"
     }),
-    loadTopItems: async function(type) {
+    loadTopItems: function(type) {
       const params = {
         type,
         timeRange: this.timeRange
       };
-      await this.fetchTopItems(params);
+      this.fetchTopItems(params);
     },
-    loadAudioFeatures: async function() {
+    loadListeningData: async function() {
       this.loading = true;
+      const artists = this.loadTopItems("artists");
+      const tracks = this.loadTopItems("tracks");
+      await Promise.all([artists, tracks]);
       await this.fetchFeatures(this.timeRange);
       this.loading = false;
     },
@@ -99,7 +105,7 @@ export default {
     }
   },
   created() {
-    this.loadAudioFeatures();
+    this.loadListeningData();
   }
 };
 </script>

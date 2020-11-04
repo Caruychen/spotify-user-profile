@@ -5,15 +5,9 @@
         <b-col
           ><h3>Top 10 {{ type | capitalize }}</h3></b-col
         >
-        <b-col
-          ><BaseTimeRangeSelector @updateTimeRange="onTimeRangeUpdate"
-        /></b-col>
       </b-row>
     </b-container>
-    <div v-if="loading" class="loading-container">
-      <b-spinner label="Spinning"></b-spinner>
-    </div>
-    <ul v-else>
+    <ul>
       <li v-for="(item, index) in topTen(type, timeRange)" :key="index">
         <BaseListCard :item="item" />
       </li>
@@ -22,53 +16,21 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import BaseTimeRangeSelector from "@/components/BaseTimeRangeSelector.vue";
+import { mapGetters } from "vuex";
 import BaseListCard from "@/components/BaseListCard.vue";
 
 export default {
-  data() {
-    return {
-      loading: false,
-      timeRange: "long_term"
-    };
-  },
   props: {
-    type: String
+    type: String,
+    timeRange: String
   },
   components: {
-    BaseTimeRangeSelector,
     BaseListCard
   },
   computed: {
     ...mapGetters("top", {
       topTen: "getTopTen"
     })
-  },
-  watch: {
-    timeRange: function() {
-      this.loadTopItems();
-    }
-  },
-  methods: {
-    ...mapActions({
-      fetchTopItems: "top/fetchTopItems"
-    }),
-    loadTopItems: async function() {
-      this.loading = true;
-      const params = {
-        type: this.type,
-        timeRange: this.timeRange
-      };
-      await this.fetchTopItems(params);
-      this.loading = false;
-    },
-    onTimeRangeUpdate(timeRange) {
-      this.timeRange = timeRange;
-    }
-  },
-  created() {
-    this.loadTopItems();
   }
 };
 </script>
