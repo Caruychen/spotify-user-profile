@@ -1,4 +1,8 @@
-import { colorInterval, colorArray, capitalize } from "@/store/helpers/helpers.js";
+import {
+  colorInterval,
+  colorArray,
+  capitalize
+} from "@/store/helpers/helpers.js";
 
 export default {
   namespaced: true,
@@ -26,6 +30,9 @@ export default {
       backgroundColor: "none",
       plot: {
         aspect: "area"
+      },
+      plotarea: {
+        adjustLayout: true
       },
       tooltip: {
         decimals: 2,
@@ -56,6 +63,11 @@ export default {
     offsetHeight: (state, getters) => type => {
       const defaultChartHeight = 480;
       return defaultChartHeight * getters.chartScale - state.titleHeight[type];
+    },
+    radarItemScale: (state, getters) => {
+      return getters.chartScale === 1
+        ? getters.chartScale
+        : getters.chartScale * 0.6;
     },
     pieConfig: (state, getters, rootState, rootGetters) => timeRange => {
       const seriesData = rootGetters["features/valueCount"](
@@ -183,7 +195,9 @@ export default {
           {
             ...state.radarData,
             scaleK: {
-              values: rootState.features["featureList"].map(_ => capitalize(_.name)),
+              values: rootState.features["featureList"].map(_ =>
+                capitalize(_.name)
+              ),
               item: {
                 fontColor: "#E7DFDD",
                 fontSize: fontBase * getters.fontScale,
@@ -191,7 +205,9 @@ export default {
                 backgroundColor: "#302d3b",
                 borderWidth: 1,
                 padding: "5 10",
-                borderRadius: 10
+                borderRadius: 10,
+                maxWidth: 120 * getters.radarItemScale,
+                wrapText: true
               },
               tick: {
                 lineColor: "#9c9795",
@@ -218,16 +234,18 @@ export default {
                 backgroundColor: "transparent"
               }
             },
-            series: [{
-              values: rootGetters["track/getFeatureValues"],
-              lineColor: "#6771E3",
-              backgroundColor: "#6771E3",
-              marker: {
+            series: [
+              {
+                values: rootGetters["track/getFeatureValues"],
+                lineColor: "#6771E3",
                 backgroundColor: "#6771E3",
-                borderColor: "#E7DFDD",
-                size: 3
+                marker: {
+                  backgroundColor: "#6771E3",
+                  borderColor: "#E7DFDD",
+                  size: 3
+                }
               }
-            }],
+            ]
           }
         ]
       };
