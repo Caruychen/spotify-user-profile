@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <a :href="buttonLink" class="btn btn-primary">
+    <a :href="buttonLink" class="btn btn-spotify-button">
       Sign in with Spotify
     </a>
   </div>
