@@ -19,20 +19,14 @@ export default {
   },
   actions: {
     fetchFollowing: async ({ commit }, type) => {
-      try {
-        const following = await spotifyHTTP.get(
-          "me/following?" +
-            querystring.stringify({
-              type
-            })
-        );
-        if (following.status === 200) {
-          commit("setFollowing", following.data.artists);
-        }
-      } catch (error) {
-        console.error(
-          `${error} in follow.js - ${error.response.data.error.error_description}`
-        );
+      const following = await spotifyHTTP.get(
+        "me/following?" +
+          querystring.stringify({
+            type
+          })
+      );
+      if (following.status === 200) {
+        commit("setFollowing", following.data.artists);
       }
     }
   }

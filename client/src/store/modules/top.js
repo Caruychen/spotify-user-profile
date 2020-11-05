@@ -63,37 +63,30 @@ export default {
       return topTenCall;
     },
     topItemsCall: async ({ state, commit }, { type, timeRange }) => {
-      try {
-        const category = state[type][timeRange];
-        if (!category.items) {
-          const limit = 50;
-          const topItems = await spotifyHTTP.get(
-            "me/top/" +
-              type +
-              "?" +
-              querystring.stringify({
-                limit,
-                time_range: timeRange
-              })
-          );
-          if (topItems.status === 200) {
-            commit("setTopItems", {
-              items: topItems.data.items,
-              type,
-              timeRange
-            });
-          }
-          commit("setFetching", { type, timeRange, status: false });
-          commit("setFetchingCall", { type, timeRange, fetchCall: null });
-          return Promise.resolve(true);
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in auth.js - ${error.response.data.error.error_description}`
+      const category = state[type][timeRange];
+      if (!category.items) {
+        const limit = 50;
+        const topItems = await spotifyHTTP.get(
+          "me/top/" +
+            type +
+            "?" +
+            querystring.stringify({
+              limit,
+              time_range: timeRange
+            })
         );
-        return Promise.reject(error);
+        if (topItems.status === 200) {
+          commit("setTopItems", {
+            items: topItems.data.items,
+            type,
+            timeRange
+          });
+        }
+        commit("setFetching", { type, timeRange, status: false });
+        commit("setFetchingCall", { type, timeRange, fetchCall: null });
+        return Promise.resolve(true);
       }
+      return Promise.resolve(true);
     }
   }
 };

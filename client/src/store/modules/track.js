@@ -119,30 +119,18 @@ export default {
       await Promise.all([trackCall, featureCall]);
     },
     fetchTrack: async ({ commit }, id) => {
-      try {
-        const track = await spotifyHTTP.get(`tracks/${id}`);
-        if (track.status === 200) {
-          commit("setTrack", track.data);
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in track.js - ${error.response.data.error.message}`
-        );
+      const track = await spotifyHTTP.get(`tracks/${id}`);
+      if (track.status === 200) {
+        commit("setTrack", track.data);
       }
+      return Promise.resolve(true);
     },
     fetchTrackFeatures: async ({ commit }, id) => {
-      try {
-        const features = await spotifyHTTP.get(`audio-features/${id}`);
-        if (features.status === 200) {
-          commit("setTrackFeatures", features.data);
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in track.js - ${error.response.data.error.message}`
-        );
+      const features = await spotifyHTTP.get(`audio-features/${id}`);
+      if (features.status === 200) {
+        commit("setTrackFeatures", features.data);
       }
+      return Promise.resolve(true);
     }
   }
 };

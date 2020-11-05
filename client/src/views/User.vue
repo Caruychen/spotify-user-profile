@@ -69,18 +69,11 @@ export default {
   created() {
     this.loading = true;
     (async () => {
-      try {
-        const profile = this.fetchUserProfile();
-        const playlists = this.fetchPlaylists();
-        const following = this.fetchFollowing("artist");
-        await Promise.all([profile, playlists, following]);
-
-        this.loading = false;
-      } catch (error) {
-        console.error(
-          `${error} in User.vue - ${error.response.data.error.message}`
-        );
-      }
+      const profile = this.fetchUserProfile();
+      const playlists = this.fetchPlaylists();
+      const following = this.fetchFollowing("artist");
+      await Promise.all([profile, playlists, following]);
+      this.loading = false;
     })();
   }
 };

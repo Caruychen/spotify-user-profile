@@ -76,72 +76,48 @@ export default {
       ]);
     },
     fetchArtist: async ({ commit }, id) => {
-      try {
-        const artist = await spotifyHTTP.get(`artists/${id}`);
-        if (artist.status === 200) {
-          commit("setArtist", artist.data);
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in artist.js - ${error.response.data.error.message}`
-        );
+      const artist = await spotifyHTTP.get(`artists/${id}`);
+      if (artist.status === 200) {
+        commit("setArtist", artist.data);
       }
+      return Promise.resolve(true);
     },
     fetchAlbums: async ({ commit }, id) => {
-      try {
-        const albums = await spotifyHTTP.get(`artists/${id}/albums`);
-        if (albums.status === 200) {
-          commit("setArtistSubData", {
-            data: albums.data,
-            category: "albums"
-          });
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in artist.js - ${error.response.data.error.message}`
-        );
+      const albums = await spotifyHTTP.get(`artists/${id}/albums`);
+      if (albums.status === 200) {
+        commit("setArtistSubData", {
+          data: albums.data,
+          category: "albums"
+        });
       }
+      return Promise.resolve(true);
     },
     fetchTopTracks: async ({ commit }, id) => {
-      try {
-        const topTracks = await spotifyHTTP.get(
-          "artists/" +
-            id +
-            "/top-tracks?" +
-            querystring.stringify({
-              country: "from_token"
-            })
-        );
-        if (topTracks.status === 200) {
-          commit("setArtistSubData", {
-            data: topTracks.data,
-            category: "topTracks"
-          });
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in artist.js - ${error.response.data.error.message}`
-        );
+      const topTracks = await spotifyHTTP.get(
+        "artists/" +
+          id +
+          "/top-tracks?" +
+          querystring.stringify({
+            country: "from_token"
+          })
+      );
+      if (topTracks.status === 200) {
+        commit("setArtistSubData", {
+          data: topTracks.data,
+          category: "topTracks"
+        });
       }
+      return Promise.resolve(true);
     },
     fetchRelatedArtists: async ({ commit }, id) => {
-      try {
-        const albums = await spotifyHTTP.get(`artists/${id}/related-artists`);
-        if (albums.status === 200) {
-          commit("setArtistSubData", {
-            data: albums.data,
-            category: "relatedArtists"
-          });
-        }
-        return Promise.resolve(true);
-      } catch (error) {
-        console.error(
-          `${error} in artist.js - ${error.response.data.error.message}`
-        );
+      const albums = await spotifyHTTP.get(`artists/${id}/related-artists`);
+      if (albums.status === 200) {
+        commit("setArtistSubData", {
+          data: albums.data,
+          category: "relatedArtists"
+        });
       }
+      return Promise.resolve(true);
     }
   }
 };
