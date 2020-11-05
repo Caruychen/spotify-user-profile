@@ -40,9 +40,6 @@ export default {
         commit("setRefreshingCall", null);
         return Promise.resolve(true);
       } catch (error) {
-        console.error(
-          `${error} in auth.js - ${error.response.data.error.error_description}`
-        );
         if (error.response.status === 400) {
           router.push({
             name: "Login"
