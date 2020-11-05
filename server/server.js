@@ -9,15 +9,15 @@ const cookieParser = require('cookie-parser');
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-let REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:8081/callback';
-let FRONTEND_URI = process.env.FRONTEND_URI || 'http://localhost:8080';
+let REDIRECT_URI = process.env.REDIRECT_URI || 'https://audio-viber.herokuapp.com/callback';
+let FRONTEND_URI = process.env.FRONTEND_URI || 'https://audio-viber.herokuapp.com';
 const PORT = process.env.PORT || 8081;
 const scope = "user-read-private user-read-email playlist-read-private playlist-read-collaborative user-follow-read user-top-read user-read-recently-played user-read-playback-state user-modify-playback-state";
 const stateKey = "spotify_auth_state";
 
 if (process.env.NODE_ENV !== 'production') {
     REDIRECT_URI = 'http://localhost:8081/callback';
-    FRONTEND_URI = 'http://localhost:8080';
+    FRONTEND_URI = 'http://localhost:8081';
 }
 
 /**
@@ -40,21 +40,21 @@ function generateRandomString(length) {
 const app = express();
 
 // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '/public')));
+app.use(express.static(path.resolve(__dirname + '/public')));
 
 app
     .use(express.static(path.resolve(__dirname + "/public")))
     .use(cors())
-    .use(cookieParser());
+    .use(cookieParser())
+    .use(express.static(path.resolve(__dirname + '/public')));
 
 app.get('/', function (req, res) {
-    res.render(path.resolve(__dirname, '/public/index.html'));
+    res.render(path.resolve(__dirname + '/public/index.html'));
 });
 
 app.get("/login", function (req, res) {
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
-
     // Application requests authorization
     res.redirect(
         "https://accounts.spotify.com/authorize?" +
@@ -67,7 +67,6 @@ app.get("/login", function (req, res) {
         })
     );
 });
-
 
 app.get("/callback", async (req, res) => {
     const code = req.query.code || null;
@@ -118,7 +117,7 @@ app.get("/callback", async (req, res) => {
 
                 res.redirect(
                     FRONTEND_URI +
-                    "/login?" +
+                    "/loginpage?" +
                     querystring.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
@@ -168,5 +167,10 @@ app.get("/refresh_token", async (req, res) => {
         })
     }
 })
+
+// All other requests return the Vue app, so it can handle routing.
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/public/index.html'));
+});
 
 app.listen(PORT);
