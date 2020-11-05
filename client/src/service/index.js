@@ -36,9 +36,10 @@ spotifyHTTP.interceptors.response.use(
       }
     }
     if (status === 404) {
-      router.push({
-        name: "Login"
-      });
+      if (error.response.data.error.reason != "NO_ACTIVE_DEVICE")
+        router.push({
+          name: "Login"
+        });
     }
     if (status === 503) {
       return spotifyHTTP(originalConfig);
