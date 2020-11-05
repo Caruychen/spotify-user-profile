@@ -72,18 +72,6 @@
         <b-col cols="12" class="album-items-container">
           <div v-for="(item, index) in albums" :key="index" class="album-item">
             <b-card overlay :img-src="item.image[0].url" :alt="item.name">
-              <!-- <router-link
-                :to="{
-                  name: item.type,
-                  params: {
-                    id: item.id
-                  }
-                }"
-              >
-                <b-card-text>
-                  {{ index + 1 }}
-                </b-card-text>
-              </router-link> -->
             </b-card>
             <b-link :href="item.external_url" target="_blank">
               {{ item.name }}
