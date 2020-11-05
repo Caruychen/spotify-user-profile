@@ -60,58 +60,63 @@ export default {
         const playback = await spotifyHTTP.get("me/player", {
           cancelToken: state.source.token
         });
-        if (playback.status === 200 && playback.data) {
-          const currentType = playback.data.currently_playing_type;
-          commit("setCurrentPlayback", {
-            device: playback.data.device,
-            type: currentType,
-            item: playback.data.item,
-            isPlaying: playback.data.is_playing,
-            progress: playback.data.progress_ms
-          });
+        if (playback.status === 200) {
+          if (playback.data) {
+            const currentType = playback.data.currently_playing_type;
+            commit("setCurrentPlayback", {
+              device: playback.data.device,
+              type: currentType,
+              item: playback.data.item,
+              isPlaying: playback.data.is_playing,
+              progress: playback.data.progress_ms
+            });
+          } else {
+            commit("setCurrentPlayback", {});
+          }
+        }
+        if (playback.status == 204) {
+          commit("setCurrentPlayback", {});
         }
       } catch (error) {
         if (axios.isCancel(error)) {
-          // console.log("Request cancelled", error);
-        } else {
-          console.error(
-            `${error} in player.js fetchCurrentPlayback - ${error.response.data.error.message}`
+          commit("resetCancelToken");
+        }
+      }
+    },
+    seekPosition: async ({ commit, rootState }, position) => {
+      try {
+        if (rootState.profile["user"].product === "premium") {
+          commit("cancelRequests");
+          commit("setNewProgress", position);
+          await spotifyHTTP.put(
+            "me/player/seek?" +
+              querystring.stringify({
+                position_ms: position
+              })
           );
         }
-      }
-    },
-    seekPosition: async ({ commit }, position) => {
-      try {
-        commit("cancelRequests");
-        commit("setNewProgress", position);
-        await spotifyHTTP.put(
-          "me/player/seek?" +
-            querystring.stringify({
-              position_ms: position
-            })
-        );
-        commit("resetCancelToken");
       } catch (error) {
-        console.error(
-          `${error} in player.js seekPosition - ${error.response.data.error.message}`
-        );
-      }
-    },
-    playController: async ({ commit, dispatch }, input) => {
-      try {
-        commit("cancelRequests");
-        if (input === "play" || input === "pause") {
-          commit("switchIsPlaying");
-          await spotifyHTTP.put("me/player/" + input);
-        } else {
-          await spotifyHTTP.post("me/player/" + input);
+        if (error.response.status === 404 || error.response.status === 403) {
+          commit("setCurrentPlayback", {});
         }
-        commit("resetCancelToken");
-        dispatch("fetchCurrentPlayback");
+      }
+    },
+    playController: async ({ commit, dispatch, rootState }, input) => {
+      try {
+        if (rootState.profile["user"].product === "premium") {
+          commit("cancelRequests");
+          if (input === "play" || input === "pause") {
+            commit("switchIsPlaying");
+            await spotifyHTTP.put("me/player/" + input);
+          } else {
+            await spotifyHTTP.post("me/player/" + input);
+          }
+          dispatch("fetchCurrentPlayback");
+        }
       } catch (error) {
-        console.error(
-          `${error} in player.js pause - ${error.response.data.error.message}`
-        );
+        if (error.response.status === 404 || error.response.status === 403) {
+          commit("setCurrentPlayback", {});
+        }
       }
     }
   }

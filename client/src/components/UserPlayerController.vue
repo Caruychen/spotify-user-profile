@@ -1,5 +1,5 @@
 <template>
-  <b-row class="player-controller" align-h="center">
+  <b-row v-if="isPremium" class="player-controller" align-h="center">
     <b-col cols="3" lg="1">
       <b-icon-skip-start-fill
         @click="playController('previous')"
@@ -30,6 +30,9 @@ export default {
   computed: {
     ...mapState("player", {
       isPlaying: state => state.playback.isPlaying
+    }),
+    ...mapState("profile", {
+      isPremium: state => state.user.product === "premium"
     })
   },
   methods: {
