@@ -1,7 +1,11 @@
 import axios from "axios";
 import store from "@/store";
 
-const backendHTTP = axios.create({ baseURL: "http://localhost:8081/" });
+const backendHTTP = axios.create({
+  baseURL: process.env.NODE_ENV !== "production"
+    ? "http://localhost:8081/"
+    : "https://audio-viber.herokuapp.com/"
+});
 const spotifyHTTP = axios.create({ baseURL: "https://api.spotify.com/v1/" });
 
 spotifyHTTP.defaults.headers.common["Authorization"] =
