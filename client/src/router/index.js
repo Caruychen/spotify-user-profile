@@ -66,10 +66,10 @@ const routes = [
     ]
   },
   {
-    path: "/login",
+    path: "/loginpage",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "loginpage" */ "../views/Login.vue")
   },
   {
     path: "/404",
