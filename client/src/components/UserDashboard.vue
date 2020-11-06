@@ -1,6 +1,6 @@
 <template>
   <div id="dashboard">
-    <h2>Your listening dashboard</h2>
+    <h2>Your Top 50 Artists and Tracks</h2>
     <BaseTimeRangeSelector
       version="button"
       @updateTimeRange="onTimeRangeUpdate"
