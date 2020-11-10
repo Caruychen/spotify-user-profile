@@ -63,7 +63,8 @@ app.get("/login", function (req, res) {
             client_id: CLIENT_ID,
             scope: scope,
             redirect_uri: REDIRECT_URI,
-            state: state
+            state: state,
+            show_dialog: true
         })
     );
 });
