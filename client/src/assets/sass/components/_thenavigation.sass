@@ -6,20 +6,33 @@
     justify-content: center
     z-index: 2
     background-color: $void
+
     .nav-link
         font-size: 0.7rem
-        padding: 1rem
+        padding: 1rem 0
         flex: 1 1 0px
         svg
             margin-bottom: 5px
             height: 1.25rem
             width: 1.25rem
+    .github
+        position: absolute
+        display: inline-block
+        bottom: 0
+        width: 100%
+        padding: 30%
+        svg
+            fill: $stark
 
 .nav-link:hover
     background-color: $void-light
 
 #nav a.router-link-exact-active
     background-color: $void-light
+
+@include media-breakpoint-down(sm)
+    #nav .github
+        display: none
 
 @include media-breakpoint-up(md)
     #nav
@@ -28,6 +41,8 @@
         height: 100%
         .nav-link
             flex: 0
+            padding: 1rem
+
 
 @include media-breakpoint-up(lg)
     #nav
