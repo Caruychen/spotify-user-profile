@@ -4,10 +4,14 @@
   </div>
   <div v-else id="user">
     <b-img
-      :src="user.images[0].url"
+      :src="
+        user.images.length > 0
+          ? user.images[0].url
+          : require('@/assets/logos/person.svg')
+      "
       fluid
       rounded
-      alt="Profile image"
+      alt="Profile"
       id="user-profile-image"
     ></b-img>
     <b-jumbotron :header="user.display_name" header-level="4">

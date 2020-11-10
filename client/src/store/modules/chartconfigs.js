@@ -70,16 +70,20 @@ export default {
         : getters.chartScale * 0.6;
     },
     pieConfig: (state, getters, rootState, rootGetters) => timeRange => {
-      const seriesData = rootGetters["features/valueCount"](
-        "key",
-        timeRange
-      ).map((item, index, array) => {
-        const color = colorInterval(state.pieColorRange, index, array.length);
-        return { ...item, backgroundColor: color };
-      });
-      const valueBoxFontBase = 12;
+      const values = rootGetters["features/valueCount"]("key", timeRange);
+      const seriesData = values
+        ? values.map((item, index, array) => {
+            const color = colorInterval(
+              state.pieColorRange,
+              index,
+              array.length
+            );
+            return { ...item, backgroundColor: color };
+          })
+        : null;
+      const normalFontSize = 12;
       const sliceBase = 80;
-      const tooltipFontBase = 16;
+      const largeFontSize = 16;
       const tooltipYOffsetBase = getters.offsetHeight("pie") / 2;
       return {
         graphset: [
@@ -88,7 +92,7 @@ export default {
             plot: {
               valueBox: {
                 text: "%t\n%npv%",
-                fontSize: valueBoxFontBase * getters.fontScale,
+                fontSize: normalFontSize * getters.fontScale,
                 decimals: 0,
                 placement: "out",
                 rules: [
@@ -110,13 +114,21 @@ export default {
             tooltip: {
               text:
                 '<span style="color:%color">%t:</span><br><span style="color:%color">%v tracks</span>',
-              fontSize: tooltipFontBase * getters.fontScale,
+              fontSize: largeFontSize * getters.fontScale,
               backgroundColor: "none",
               borderColor: "none",
               anchor: "c",
               x: "50%",
               y: tooltipYOffsetBase,
               sticky: true
+            },
+            noData: {
+              text: "No track data to show yet!",
+              fontSize: largeFontSize * getters.fontScale,
+              border: "1px solid #48ada3",
+              borderRadius: "5px",
+              fontColor: "#E7DFDD",
+              alpha: 0.5
             },
             series: seriesData
           }
@@ -178,6 +190,14 @@ export default {
               tick: {
                 visible: false
               }
+            },
+            noData: {
+              text: "No track data to show yet!",
+              fontSize: fontSizeBase * getters.fontScale,
+              border: "1px solid #48ada3",
+              borderRadius: "5px",
+              fontColor: "#E7DFDD",
+              alpha: 0.5
             },
             series: rootGetters["features/featureDist"](
               timeRange,

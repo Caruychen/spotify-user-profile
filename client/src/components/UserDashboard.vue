@@ -28,11 +28,11 @@
           {{ popularityDescription }}
         </b-popover>
         <div class="item-main">
-          <b>{{ avgPopularity("tracks", timeRange).average }}%</b>
+          <b>{{ avgPopularity("tracks", timeRange) }}%</b>
           <p>Average track popularity</p>
         </div>
         <div class="item-main">
-          <b>{{ avgPopularity("artists", timeRange).average }}%</b>
+          <b>{{ avgPopularity("artists", timeRange) }}%</b>
           <p>Average artist popularity</p>
         </div>
       </div>

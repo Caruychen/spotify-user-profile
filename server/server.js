@@ -17,7 +17,7 @@ const stateKey = "spotify_auth_state";
 
 if (process.env.NODE_ENV !== 'production') {
     REDIRECT_URI = 'http://localhost:8081/callback';
-    FRONTEND_URI = 'http://localhost:8081';
+    FRONTEND_URI = 'http://localhost:8080';
 }
 
 /**

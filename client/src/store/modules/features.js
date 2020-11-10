@@ -64,10 +64,10 @@ export default {
       });
     },
     featureDist: state => (timeRange, bins, feature) => {
+      if (state.audioFeatures[timeRange].length === 0) return null;
       const range = 1;
       const width = range / bins;
       const values = [];
-
       state.audioFeatures[timeRange].forEach(item => {
         const index = Math.floor(item[feature] / width);
         let diff = index - values.length;
@@ -94,6 +94,7 @@ export default {
       ];
     },
     valueCount: state => (type, timeRange) => {
+      if (state.audioFeatures[timeRange].length === 0) return null;
       const countArray = [];
       state.audioFeatures[timeRange].forEach(item => {
         const index = item[type];
@@ -104,19 +105,13 @@ export default {
           while (diff > 0) {
             countArray.push({
               values: [0],
-              text:
-                type === "key"
-                  ? state.keyMap[countArray.length]
-                  : `${countArray.length}/${countArray.length > 4 ? "8" : "4"}`
+              text: state.keyMap[countArray.length]
             });
             diff--;
           }
           countArray.push({
             values: [1],
-            text:
-              type === "key"
-                ? state.keyMap[index]
-                : `${index}/${index > 4 ? "8" : "4"}`
+            text: state.keyMap[index]
           });
         }
       });

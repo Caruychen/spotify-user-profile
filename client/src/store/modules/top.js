@@ -26,18 +26,15 @@ export default {
       return getters.getAllTopItems(type, timeRange).slice(0, 10);
     },
     avgPopularity: state => (type, timeRange) => {
+      if (state[type][timeRange].items.length === 0) return "N/A";
       const popularityNumerator = state[type][timeRange].items
         .map(item => {
           return item.popularity;
         })
         .reduce((acc, cur) => acc + cur);
-      const average = Math.round(
+      return Math.round(
         popularityNumerator / state[type][timeRange].items.length
       );
-      return {
-        average,
-        total: state[type][timeRange].items.length
-      };
     }
   },
   mutations: {
