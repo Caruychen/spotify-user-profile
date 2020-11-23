@@ -22,6 +22,9 @@
             popular tracks and other similar artists. You can even learn about
             the tracks you are listening to right now, and control your Spotify
             player directly in app!
+            <br />
+            The best experience is optimised for desktop use, but works just as well
+            on mobile and tablet devices.
           </b-card-text>
         </b-card>
       </b-collapse>
