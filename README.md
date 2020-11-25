@@ -11,8 +11,17 @@ Built using:
 * Express
 * Node
 * ZingCharts
+* Spotify API
 
 ## Project setup
+### Using your credentials
+1. Register a Spotify App and add a redirect URI, e.g. http://localhost:8081/callback.
+2. Create a `.env` file in the server directory with the following variables:
+    * CLIENT_ID = XXXXXX
+    * CLIENT_SECRET = XXXXXXX
+    * FRONTEND_URI=http://localhost:8080
+    * REDIRECT_URI=http://localhost:8081/callback
+3. If using a different base url to `localhost:8081`, then replace the login link in [Login.vue](client/src/views/Login.vue) and and [index.js](client/src/service/index.js)
 ```
 npm install
 ```
