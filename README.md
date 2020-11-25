@@ -50,7 +50,7 @@ See general information about an artist's popular tracks, albums, and other rela
 
 Desktop: | Mobile
 :---:|:---:
-<img src="https://i.ibb.co/7XBryQg/artist-desktop.png" alt="artist-desktop" width="600" border="0"> | <img src="https://i.ibb.co/37mbJHW/artist-mobile.png" alt="artist-mobile" width="200" border="0">
+<img src="https://i.ibb.co/7XBryQg/artist-desktop.png" alt="artist-desktop" width="600" border="0"> | <a href="https://ibb.co/MfRyMPf"><img src="https://i.ibb.co/nBDqzQB/artist-mobile.png" alt="artist-mobile" width="200" border="0"></a>
 
 ### Track Details
 See more in-depth feature analysis of a specific track's audio.
