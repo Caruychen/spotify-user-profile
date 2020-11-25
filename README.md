@@ -37,12 +37,13 @@ The dashboard displays data for:
     * Valence
 * Top 10 lists
 
-Average Popularity | Keys | Audio Features
-:-------:|:-------:|:---:
-<img src="https://i.ibb.co/SQFHbFx/average-popularity.png" alt="average-popularity" width="300" border="0"> | <img src="https://i.ibb.co/k3vBt4X/keys.png" alt="keys" width="370" border="0"> | <img src="https://i.ibb.co/kJCrRXp/audio-features.png" alt="audio-features" width="600" border="0">
+Average Popularity | Keys
+:-------:|:-------:
+<img src="https://i.ibb.co/SQFHbFx/average-popularity.png" alt="average-popularity" width="300" border="0"> | <img src="https://i.ibb.co/k3vBt4X/keys.png" alt="keys" width="370" border="0">
 
-Top 10 |
-<img src="https://i.ibb.co/TLgGhYm/top-ten.png" alt="top-ten" width="600" border="0">
+Audio Features | Top 10
+:---:|:---:
+<img src="https://i.ibb.co/kJCrRXp/audio-features.png" alt="audio-features" width="600" border="0"> | <img src="https://i.ibb.co/TLgGhYm/top-ten.png" alt="top-ten" width="600" border="0">
 
 ### Artist Details
 See general information about an artist's popular tracks, albums, and other related artists.
