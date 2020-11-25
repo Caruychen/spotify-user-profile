@@ -24,7 +24,6 @@ Controls include pause, play, skip, and seek.
 
 ### Top artists & tracks dashboard
 Learn about the music you listen to with feature analysis of your top 50 artists and tracks from All Time, Last 6 Months or Last 4 Weeks.
-
 The dashboard displays data for:
 * Average artist & track popularity
 * Keys that tracks are based in
@@ -37,6 +36,17 @@ The dashboard displays data for:
     * Speechiness
     * Valence
 * Top 10 lists
+
+Average Popularity | Keys
+:-------:|:-------:
+<img src="https://i.ibb.co/SQFHbFx/average-popularity.png" alt="average-popularity" border="0"> | 
+<img src="https://i.ibb.co/k3vBt4X/keys.png" alt="keys" border="0">
+Audio Features 
+:---:
+<img src="https://i.ibb.co/kJCrRXp/audio-features.png" alt="audio-features" border="0">
+Top 10
+:---:
+<img src="https://i.ibb.co/TLgGhYm/top-ten.png" alt="top-ten" border="0">
 
 ### Artist Details
 See general information about an artist's popular tracks, albums, and other related artists.
