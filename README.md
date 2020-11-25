@@ -5,7 +5,7 @@ Audio Viber lets your learn more about your favourite music on Spotify with deta
 
 Desktop: | Mobile
 :-------:|:-------:
-<img src="https://i.ibb.co/Mpsh9v5/user-desktop.png" alt="user-desktop" width="500"> | <img src="https://i.ibb.co/cgZyMPM/user-mobile.png" alt="user-mobile" width="200" border="0">
+<img src="https://i.ibb.co/Mpsh9v5/user-desktop.png" alt="user-desktop" width="600"> | <img src="https://i.ibb.co/cgZyMPM/user-mobile.png" alt="user-mobile" width="200" border="0">
 
 Built using:
 * Vue-CLI
