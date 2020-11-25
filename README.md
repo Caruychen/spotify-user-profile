@@ -4,7 +4,7 @@ demo: https://audio-viber.herokuapp.com
 Audio Viber lets your learn more about your favourite music on Spotify with detailed audio feature visualisations of your top tracks and artists. Also control your Spotify directly from the web app, and get to know more about the tracks you are listening to right now.
 
 Desktop: | Mobile
-:-------:|:-------:
+:---:|:---:
 <img src="https://i.ibb.co/Mpsh9v5/user-desktop.png" alt="user-desktop" width="600"> | <img src="https://i.ibb.co/cgZyMPM/user-mobile.png" alt="user-mobile" width="200" border="0">
 
 Built using:
@@ -38,7 +38,7 @@ The dashboard displays data for:
 * Top 10 lists
 
 Average Popularity | Keys
-:-------:|:-------:
+:---:|:---:
 <img src="https://i.ibb.co/SQFHbFx/average-popularity.png" alt="average-popularity" width="300" border="0"> | <img src="https://i.ibb.co/k3vBt4X/keys.png" alt="keys" width="370" border="0">
 
 Audio Features | Top 10
@@ -48,14 +48,30 @@ Audio Features | Top 10
 ### Artist Details
 See general information about an artist's popular tracks, albums, and other related artists.
 
+Desktop: | Mobile
+:---:|:---:
+<img src="https://i.ibb.co/7XBryQg/artist-desktop.png" alt="artist-desktop" width="600" border="0"> | <img src="https://i.ibb.co/37mbJHW/artist-mobile.png" alt="artist-mobile" width="200" border="0">
+
 ### Track Details
 See more in-depth feature analysis of a specific track's audio.
+
+Desktop: | Mobile
+:---:|:---:
+<img src="https://i.ibb.co/bm570Ts/track-desktop.png" alt="track-desktop" width="600" border="0"> | <img src="https://i.ibb.co/D7V7mvZ/track-mobile.png" alt="track-mobile" width="200" border="0">
 
 ### All Top Artists and Tracks
 See a list of all of your top 50 artists and tracks from All Time, Last 6 Months or Last 4 Weeks.
 
+Desktop: | Mobile
+:---:|:---:
+<img src="https://i.ibb.co/HhxZMnB/top-50-desktop.png" alt="top-50-desktop" width="600" border="0"> | <img src="https://i.ibb.co/5sXp05g/top-50-mobile.png" alt="top-50-mobile" width="200" border="0">
+
 ### Recent
 See an itemised list of the 20 most recent tracks you listened to.
+
+Desktop: | Mobile
+:---:|:---:
+<img src="https://i.ibb.co/f87JhKN/recent-desktop.png" alt="recent-desktop" width="600" border="0"> | <img src="https://i.ibb.co/Zhzj2N0/recent-mobile.png" alt="recent-mobile" width="200" border="0">
 
 ## Project setup
 ### Using your credentials
