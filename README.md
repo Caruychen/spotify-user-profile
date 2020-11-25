@@ -18,22 +18,37 @@ Built using:
 * Spotify API
 
 ## Features
-
 ### Spotify Controller
+See what tracks you are listening to in Spotify, and control your playback directly in-app (control for premium users only).
+Controls include pause, play, skip, and seek.
 
-### Top artists & tracks analysis
+### Top artists & tracks dashboard
+Learn about the music you listen to with feature analysis of your top 50 artists and tracks from All Time, Last 6 Months or Last 4 Weeks.
 
-#### Average popularity
+The dashboard displays data for:
+* Average artist & track popularity
+* Keys that tracks are based in
+* Audio features:
+    * Acousticness
+    * Danceability
+    * Energy
+    * Instrumentalness
+    * Liveness
+    * Speechiness
+    * Valence
+* Top 10 lists
 
-#### Keys
+### Artist Details
+See general information about an artist's popular tracks, albums, and other related artists.
 
-#### Audio features
-
-#### Top 10
+### Track Details
+See more in-depth feature analysis of a specific track's audio.
 
 ### All Top Artists and Tracks
+See a list of all of your top 50 artists and tracks from All Time, Last 6 Months or Last 4 Weeks.
 
 ### Recent
+See an itemised list of the 20 most recent tracks you listened to.
 
 ## Project setup
 ### Using your credentials
