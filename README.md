@@ -39,12 +39,12 @@ The dashboard displays data for:
 
 Average Popularity | Keys
 :-------:|:-------:
-<img src="https://i.ibb.co/SQFHbFx/average-popularity.png" alt="average-popularity" border="0"> | 
-<img src="https://i.ibb.co/k3vBt4X/keys.png" alt="keys" border="0">
-Audio Features 
+<img src="https://i.ibb.co/SQFHbFx/average-popularity.png" alt="average-popularity" width="300" border="0"> | 
+<img src="https://i.ibb.co/k3vBt4X/keys.png" alt="keys" width="300" border="0">
+Audio Features |
 :---:
 <img src="https://i.ibb.co/kJCrRXp/audio-features.png" alt="audio-features" border="0">
-Top 10
+Top 10 |
 :---:
 <img src="https://i.ibb.co/TLgGhYm/top-ten.png" alt="top-ten" border="0">
 
