@@ -17,6 +17,24 @@ Built using:
 * ZingCharts
 * Spotify API
 
+## Features
+
+### Spotify Controller
+
+### Top artists & tracks analysis
+
+#### Average popularity
+
+#### Keys
+
+#### Audio features
+
+#### Top 10
+
+### All Top Artists and Tracks
+
+### Recent
+
 ## Project setup
 ### Using your credentials
 1. Register a Spotify App and add a redirect URI, e.g. http://localhost:8081/callback.
