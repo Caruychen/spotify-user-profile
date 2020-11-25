@@ -3,8 +3,10 @@ demo: https://audio-viber.herokuapp.com
 
 Audio Viber lets your learn more about your favourite music on Spotify with detailed audio feature visualisations of your top tracks and artists. Also control your Spotify directly from the web app, and get to know more about the tracks you are listening to right now.
 
-Desktop: <img src="https://i.ibb.co/Mpsh9v5/user-desktop.png" alt="user-desktop" width="500">
-Mobile: <img src="https://i.ibb.co/cgZyMPM/user-mobile.png" alt="user-mobile" width="250" border="0">
+Desktop: | Mobile
+:-------:|:-------:
+<img src="https://i.ibb.co/Mpsh9v5/user-desktop.png" alt="user-desktop" width="500"> |
+<img src="https://i.ibb.co/cgZyMPM/user-mobile.png" alt="user-mobile" width="250" border="0">
 
 Built using:
 * Vue-CLI
